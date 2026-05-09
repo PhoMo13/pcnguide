@@ -258,17 +258,19 @@ export default function BusinessPage() {
 
             {/* Pro */}
             <div className="relative flex flex-col rounded-xl bg-primary p-8 text-white shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background">
-              <span className="absolute -top-3 right-6 rounded-full bg-accent px-3 py-1 text-xs font-bold text-foreground">
+              <span className="absolute -top-3 right-6 rounded-full bg-accent px-3 py-1 text-xs font-bold text-gray-900">
                 Most popular
               </span>
-              <h3 className="font-heading text-xl font-semibold">Pro</h3>
+              <h3 className="font-heading text-xl font-semibold text-white">
+                Pro
+              </h3>
               <p className="mt-2 font-heading text-3xl font-semibold text-white">
                 £19.99
-                <span className="text-base font-normal text-white/80">
+                <span className="text-base font-normal text-white">
                   /month
                 </span>
               </p>
-              <ul className="mt-6 flex-1 space-y-3 text-sm text-white/95">
+              <ul className="mt-6 flex-1 space-y-3 text-sm text-white">
                 {[
                   "Unlimited appeal letters",
                   "Fleet dashboard — track all active PCNs",
@@ -278,11 +280,11 @@ export default function BusinessPage() {
                   "Phone and email support",
                   "Cancel any time",
                 ].map((line) => (
-                  <li key={line} className="flex gap-2">
-                    <span className="text-accent" aria-hidden>
+                  <li key={line} className="flex gap-2 text-white">
+                    <span className="text-white" aria-hidden>
                       ✓
                     </span>
-                    <span>{line}</span>
+                    <span className="text-white">{line}</span>
                   </li>
                 ))}
               </ul>
@@ -581,7 +583,7 @@ export default function BusinessPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-primary py-14 sm:py-16">
+      <section className="bg-primary py-14 text-white sm:py-16">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl text-balance">
             Ready to stop paying PCNs you don&apos;t owe?

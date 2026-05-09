@@ -189,10 +189,10 @@ export default function HomePage() {
       <section className="py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-lg border border-border bg-primary px-6 py-10 text-center text-white sm:px-10">
-            <h2 className="font-heading text-2xl font-semibold sm:text-3xl">
+            <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl">
               Ready to Appeal?
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-base text-white/90">
+            <p className="mx-auto mt-3 max-w-xl text-base text-white">
               From £6.99 — Generate your appeal letter in minutes
             </p>
             <Link

@@ -307,10 +307,10 @@ export default function ContraventionCodePage({ params }: Props) {
         ) : null}
 
         <div className="mt-12 rounded-lg border border-border bg-primary px-6 py-8 text-center text-white">
-          <p className="font-heading text-lg font-semibold sm:text-xl">
+          <p className="font-heading text-lg font-semibold text-white sm:text-xl">
             Think you have grounds to appeal?
           </p>
-          <p className="mt-2 text-sm text-white/90">
+          <p className="mt-2 text-sm text-white">
             Generate your appeal letter — from £6.99
           </p>
           <Link
