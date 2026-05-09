@@ -1,9 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type IssueMethod = "reg9" | "reg10";
+
+const STORAGE_KEY = "pcnguide_deadline";
+
+type SavedDeadlinePayload = {
+  pcnDate: string;
+  issuedType: IssueMethod;
+  pcnRef: string;
+  savedAt: string;
+};
 
 type Urgency = "green" | "amber" | "red" | "grey";
 
@@ -238,6 +247,41 @@ export default function DeadlinesPage() {
   const [day0, setDay0] = useState<Date | null>(null);
   const [deadlines, setDeadlines] = useState<ComputedDeadline[]>([]);
   const [formError, setFormError] = useState<string | null>(null);
+  const [showRestoredBanner, setShowRestoredBanner] = useState(false);
+  const [restoredPcnLabel, setRestoredPcnLabel] = useState<string | null>(null);
+  const [reminderEmail, setReminderEmail] = useState("");
+  const [reminderStatus, setReminderStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw) as Partial<SavedDeadlinePayload>;
+      if (
+        typeof data.pcnDate !== "string" ||
+        (data.issuedType !== "reg9" && data.issuedType !== "reg10")
+      ) {
+        return;
+      }
+      const pcn = parseDateInput(data.pcnDate);
+      if (!pcn) return;
+      const ref = typeof data.pcnRef === "string" ? data.pcnRef : "";
+      setIssueDate(data.pcnDate);
+      setIssueMethod(data.issuedType);
+      setReference(ref);
+      const d0 =
+        data.issuedType === "reg9" ? pcn : addWorkingDaysAfter(pcn, 2);
+      setDay0(d0);
+      setDeadlines(buildDeadlines(d0));
+      setSubmitted(true);
+      setShowRestoredBanner(true);
+      setRestoredPcnLabel(formatUkDate(pcn));
+    } catch {
+      /* ignore corrupt storage */
+    }
+  }, []);
 
   const reducedDate = deadlines.find((d) => d.id === "reduced")?.date ?? null;
   const fullDate = deadlines.find((d) => d.id === "full")?.date ?? null;
@@ -273,6 +317,20 @@ export default function DeadlinesPage() {
     );
   }, [day0, submitted, issueDate, issueMethod]);
 
+  function persistDeadlineForm() {
+    try {
+      const payload: SavedDeadlinePayload = {
+        pcnDate: issueDate,
+        issuedType: issueMethod,
+        pcnRef: reference,
+        savedAt: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch {
+      /* quota / private mode */
+    }
+  }
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setFormError(null);
@@ -286,6 +344,29 @@ export default function DeadlinesPage() {
     setDay0(d0);
     setDeadlines(buildDeadlines(d0));
     setSubmitted(true);
+    setShowRestoredBanner(false);
+    setRestoredPcnLabel(null);
+    setReminderStatus("idle");
+    persistDeadlineForm();
+  }
+
+  function handleClearSaved() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+    setShowRestoredBanner(false);
+    setRestoredPcnLabel(null);
+    setReminderEmail("");
+    setReminderStatus("idle");
+    setIssueDate("");
+    setIssueMethod("reg9");
+    setReference("");
+    setSubmitted(false);
+    setDay0(null);
+    setDeadlines([]);
+    setFormError(null);
   }
 
   function handleRecalculate() {
@@ -296,6 +377,38 @@ export default function DeadlinesPage() {
     setDay0(null);
     setDeadlines([]);
     setFormError(null);
+    setShowRestoredBanner(false);
+    setRestoredPcnLabel(null);
+    setReminderEmail("");
+    setReminderStatus("idle");
+  }
+
+  async function handleReminderSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (!reducedDate || !fullDate) return;
+    setReminderStatus("loading");
+    try {
+      const res = await fetch("/api/reminders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: reminderEmail.trim(),
+          pcnDate: issueDate,
+          issuedType: issueMethod,
+          pcnRef: reference,
+          reducedDeadline: formatUkDate(reducedDate),
+          fullDeadline: formatUkDate(fullDate),
+        }),
+      });
+      const data = (await res.json()) as { success?: boolean };
+      if (res.ok && data.success) {
+        setReminderStatus("success");
+      } else {
+        setReminderStatus("error");
+      }
+    } catch {
+      setReminderStatus("error");
+    }
   }
 
   function daysPhraseFor(d: Date): string {
@@ -322,6 +435,26 @@ export default function DeadlinesPage() {
       </section>
 
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+        {showRestoredBanner && restoredPcnLabel ? (
+          <div
+            className="mb-6 flex flex-col gap-2 rounded-lg border border-primary/20 bg-emerald-50/90 px-4 py-3 text-sm text-foreground sm:flex-row sm:items-center sm:justify-between"
+            role="status"
+          >
+            <p>
+              📋 We found a saved PCN from{" "}
+              <span className="font-semibold">{restoredPcnLabel}</span>. Your
+              deadlines are shown below.
+            </p>
+            <button
+              type="button"
+              onClick={handleClearSaved}
+              className="shrink-0 text-left text-sm font-semibold text-primary underline decoration-primary/40 underline-offset-2 hover:text-primary-hover"
+            >
+              Clear saved data
+            </button>
+          </div>
+        ) : null}
+
         <form
           onSubmit={handleSubmit}
           className="rounded-lg border border-border bg-background p-5 shadow-sm sm:p-6"
@@ -471,6 +604,98 @@ export default function DeadlinesPage() {
                 ))}
               </ul>
             </div>
+
+            <section
+              className="rounded-lg border border-emerald-200 bg-[#f0fdf4] p-5 sm:p-6"
+              aria-labelledby="reminder-heading"
+            >
+              <h2
+                id="reminder-heading"
+                className="font-heading text-lg font-semibold text-primary sm:text-xl"
+              >
+                Get deadline reminders by email
+              </h2>
+              <p className="mt-2 text-sm text-foreground/90">
+                We&apos;ll remind you 14 days, 7 days, and 3 days before your
+                key deadlines. Free.
+              </p>
+
+              <form onSubmit={handleReminderSubmit} className="mt-5 space-y-4">
+                <input type="hidden" name="pcnDate" value={issueDate} readOnly />
+                <input
+                  type="hidden"
+                  name="issuedType"
+                  value={issueMethod}
+                  readOnly
+                />
+                <input type="hidden" name="pcnRef" value={reference} readOnly />
+                <input
+                  type="hidden"
+                  name="reducedDeadline"
+                  value={
+                    reducedDate ? formatUkDate(reducedDate) : ""
+                  }
+                  readOnly
+                />
+                <input
+                  type="hidden"
+                  name="fullDeadline"
+                  value={fullDate ? formatUkDate(fullDate) : ""}
+                  readOnly
+                />
+                <div>
+                  <label
+                    htmlFor="reminder-email"
+                    className="block text-sm font-medium text-foreground"
+                  >
+                    Email address <span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    id="reminder-email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={reminderEmail}
+                    onChange={(e) => {
+                      setReminderEmail(e.target.value);
+                      if (reminderStatus !== "idle") setReminderStatus("idle");
+                    }}
+                    placeholder="you@example.com"
+                    className="mt-1 w-full rounded-lg border border-emerald-200 bg-background px-3 py-2.5 text-foreground placeholder:text-muted/80 focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={reminderStatus === "loading"}
+                  className="w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {reminderStatus === "loading"
+                    ? "Sending…"
+                    : "Send me reminders"}
+                </button>
+              </form>
+
+              {reminderStatus === "success" ? (
+                <p
+                  className="mt-4 text-sm font-medium text-emerald-800"
+                  role="status"
+                >
+                  ✅ Reminders set. Check your inbox — we&apos;ll email you
+                  before your deadlines.
+                </p>
+              ) : null}
+              {reminderStatus === "error" ? (
+                <p className="mt-4 text-sm font-medium text-red-700" role="alert">
+                  Something went wrong. Please try again.
+                </p>
+              ) : null}
+
+              <p className="mt-4 text-xs leading-relaxed text-muted">
+                We only use your email to send PCN reminders. We never share your
+                data. Unsubscribe any time.
+              </p>
+            </section>
 
             <div
               className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950"
