@@ -29,6 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: "https://www.pcnguide.co.uk/blue-badge",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://www.pcnguide.co.uk/appeal",
       lastModified: new Date(),
       changeFrequency: "monthly",
