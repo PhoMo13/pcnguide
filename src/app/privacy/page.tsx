@@ -30,20 +30,20 @@ function ExternalLink({
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-background">
+    <div className="min-w-0 bg-background">
       <section className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-16">
+          <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl">
             Privacy Policy
           </h1>
           <p className="mt-3 text-sm text-muted">Last updated: May 2026</p>
         </div>
       </section>
 
-      <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="space-y-10 text-muted leading-relaxed">
+      <article className="mx-auto max-w-3xl min-w-0 px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-16">
+        <div className="max-w-full space-y-8 break-words text-base text-muted leading-relaxed md:space-y-10">
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               1. Who we are
             </h2>
             <p className="mt-4">
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               2. What data we collect
             </h2>
             <ul className="mt-4 list-disc space-y-2 pl-5">
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               3. How we use your data
             </h2>
             <ul className="mt-4 list-disc space-y-2 pl-5">
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               4. Data storage
             </h2>
             <p className="mt-4">
@@ -107,7 +107,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               5. Third parties
             </h2>
             <ul className="mt-4 list-disc space-y-2 pl-5">
@@ -139,7 +139,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               6. Your rights
             </h2>
             <p className="mt-4">
@@ -156,7 +156,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               7. Cookies
             </h2>
             <p className="mt-4">
@@ -166,7 +166,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-heading text-xl font-semibold text-foreground">
+            <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
               8. Changes
             </h2>
             <p className="mt-4">

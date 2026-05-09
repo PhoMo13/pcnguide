@@ -81,17 +81,17 @@ export default function BusinessPage() {
   }
 
   return (
-    <div className="bg-background">
+    <div className="min-w-0 bg-background">
       {/* Hero */}
       <section className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-20">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-primary">
             Business
           </p>
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance max-w-4xl">
+          <h1 className="max-w-4xl text-balance font-heading text-2xl font-semibold tracking-tight text-foreground md:text-4xl lg:text-5xl">
             Stop PCNs Costing Your Business
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted text-balance leading-relaxed">
+          <p className="mt-5 max-w-2xl text-base text-muted text-balance leading-relaxed md:text-lg">
             A subscription that covers your whole fleet. Appeal letters, deadline
             tracking, and insider enforcement knowledge — for taxis, couriers,
             takeaways and fleets.
@@ -99,13 +99,13 @@ export default function BusinessPage() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href="#pricing"
-              className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-base font-semibold text-white no-underline shadow-sm hover:bg-primary-hover"
+              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-base font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:w-auto"
             >
               See pricing
             </a>
             <a
               href="#enquiry"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-base font-semibold text-primary no-underline hover:bg-surface"
+              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-base font-semibold text-primary no-underline hover:bg-surface sm:w-auto"
             >
               Talk to us
             </a>
@@ -118,12 +118,12 @@ export default function BusinessPage() {
       </section>
 
       {/* Who it's for */}
-      <section className="border-b border-border py-14 sm:py-16">
+      <section className="border-b border-border py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             Built for businesses that move
           </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 icon: "🚕",
@@ -148,7 +148,7 @@ export default function BusinessPage() {
             ].map((card) => (
               <div
                 key={card.title}
-                className="rounded-lg border border-border bg-background p-6 shadow-sm"
+                className="min-w-0 rounded-lg border border-border bg-background p-4 shadow-sm md:p-6"
               >
                 <span className="text-2xl" aria-hidden>
                   {card.icon}
@@ -166,12 +166,12 @@ export default function BusinessPage() {
       </section>
 
       {/* Problem */}
-      <section className="border-b border-border bg-surface py-14 sm:py-16">
+      <section className="border-b border-border bg-surface py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             PCNs add up fast
           </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               {
                 stat: "£100",
@@ -188,9 +188,9 @@ export default function BusinessPage() {
             ].map((box) => (
               <div
                 key={box.stat}
-                className="rounded-lg border border-border bg-background p-6 text-center shadow-sm"
+                className="min-w-0 rounded-lg border border-border bg-background p-4 text-center shadow-sm md:p-6"
               >
-                <p className="font-heading text-3xl font-semibold text-primary sm:text-4xl">
+                <p className="font-heading text-2xl font-semibold text-primary md:text-3xl lg:text-4xl">
                   {box.stat}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -209,19 +209,19 @@ export default function BusinessPage() {
       {/* Pricing */}
       <section
         id="pricing"
-        className="scroll-mt-20 border-b border-border py-14 sm:py-16"
+        className="scroll-mt-20 border-b border-border py-8 md:py-12 lg:py-16"
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             Simple, flat-rate pricing
           </h2>
           <p className="mt-2 max-w-2xl text-muted">
             No per-letter fees. One monthly subscription covers your whole fleet.
           </p>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-10">
+          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
             {/* Basic */}
-            <div className="flex flex-col rounded-xl border-2 border-primary bg-background p-8 shadow-sm">
+            <div className="flex min-w-0 flex-col rounded-xl border-2 border-primary bg-background p-5 shadow-sm sm:p-8">
               <h3 className="font-heading text-xl font-semibold text-foreground">
                 Basic
               </h3>
@@ -250,15 +250,15 @@ export default function BusinessPage() {
               <button
                 type="button"
                 onClick={() => scrollToEnquiry("basic")}
-                className="mt-8 w-full rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white hover:bg-primary-hover"
+                className="mt-8 min-h-[44px] w-full rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white hover:bg-primary-hover"
               >
                 Get started — Basic
               </button>
             </div>
 
             {/* Pro */}
-            <div className="relative flex flex-col rounded-xl bg-primary p-8 text-white shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background">
-              <span className="absolute -top-3 right-6 rounded-full bg-accent px-3 py-1 text-xs font-bold text-gray-900">
+            <div className="relative flex min-w-0 flex-col rounded-xl bg-primary p-5 text-white shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background sm:p-8">
+              <span className="absolute -top-3 right-4 rounded-full bg-accent px-3 py-1 text-xs font-bold text-gray-900 sm:right-6">
                 Most popular
               </span>
               <h3 className="font-heading text-xl font-semibold text-white">
@@ -291,7 +291,7 @@ export default function BusinessPage() {
               <button
                 type="button"
                 onClick={() => scrollToEnquiry("pro")}
-                className="mt-8 w-full rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-primary hover:bg-white/90"
+                className="mt-8 min-h-[44px] w-full rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-primary hover:bg-white/90"
               >
                 Get started — Pro
               </button>
@@ -312,12 +312,12 @@ export default function BusinessPage() {
       </section>
 
       {/* How it works */}
-      <section className="border-b border-border bg-surface py-14 sm:py-16">
+      <section className="border-b border-border bg-surface py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             How it works
           </h2>
-          <ol className="mt-10 grid gap-8 sm:grid-cols-3">
+          <ol className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
               {
                 step: "1",
@@ -337,7 +337,7 @@ export default function BusinessPage() {
             ].map((item) => (
               <li
                 key={item.step}
-                className="relative rounded-lg border border-border bg-background p-6 shadow-sm"
+                className="relative min-w-0 rounded-lg border border-border bg-background p-4 shadow-sm md:p-6"
               >
                 <span className="font-mono text-sm font-bold text-accent">
                   {item.step}
@@ -355,16 +355,16 @@ export default function BusinessPage() {
       </section>
 
       {/* Testimonials placeholder */}
-      <section className="border-b border-border py-14 sm:py-16">
+      <section className="border-b border-border py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             What our business customers say
           </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="flex flex-col rounded-lg border border-border bg-surface p-6"
+                className="flex min-w-0 flex-col rounded-lg border border-border bg-surface p-4 md:p-6"
               >
                 <p className="flex-1 text-sm italic leading-relaxed text-muted">
                   [Testimonial coming soon — be one of our first business
@@ -372,7 +372,7 @@ export default function BusinessPage() {
                 </p>
                 <a
                   href="#enquiry"
-                  className="mt-6 inline-flex items-center justify-center rounded-lg border border-primary bg-background px-4 py-2.5 text-center text-sm font-semibold text-primary no-underline hover:bg-surface"
+                  className="mt-6 inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border border-primary bg-background px-4 py-2.5 text-center text-sm font-semibold text-primary no-underline hover:bg-surface sm:w-auto"
                 >
                   Request early access
                 </a>
@@ -385,10 +385,10 @@ export default function BusinessPage() {
       {/* Enquiry */}
       <section
         id="enquiry"
-        className="scroll-mt-20 border-b border-border py-14 sm:py-16"
+        className="scroll-mt-20 border-b border-border py-8 md:py-12 lg:py-16"
       >
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+        <div className="mx-auto max-w-2xl min-w-0 px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             Get in touch
           </h2>
           <p className="mt-2 text-muted">
@@ -398,7 +398,7 @@ export default function BusinessPage() {
 
           <form
             onSubmit={handleEnquirySubmit}
-            className="mt-8 space-y-5 rounded-xl border border-border bg-background p-6 shadow-sm sm:p-8"
+            className="mt-8 space-y-5 rounded-xl border border-border bg-background p-4 shadow-sm sm:p-6 md:p-8"
           >
             <div>
               <label
@@ -413,7 +413,7 @@ export default function BusinessPage() {
                 required
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               />
             </div>
             <div>
@@ -429,7 +429,7 @@ export default function BusinessPage() {
                 required
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               />
             </div>
             <div>
@@ -446,7 +446,7 @@ export default function BusinessPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               />
             </div>
             <div>
@@ -462,7 +462,7 @@ export default function BusinessPage() {
                 autoComplete="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               />
             </div>
             <div>
@@ -477,7 +477,7 @@ export default function BusinessPage() {
                 required
                 value={fleetSize}
                 onChange={(e) => setFleetSize(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full rounded-lg border border-border bg-background px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               >
                 <option value="">Select…</option>
                 {FLEET_OPTIONS.map((o) => (
@@ -495,7 +495,7 @@ export default function BusinessPage() {
                 {VEHICLE_OPTIONS.map((o) => (
                   <label
                     key={o.id}
-                    className="flex cursor-pointer items-center gap-2 text-sm text-foreground"
+                    className="flex min-h-[44px] cursor-pointer items-center gap-3 text-sm text-foreground"
                   >
                     <input
                       type="checkbox"
@@ -503,7 +503,7 @@ export default function BusinessPage() {
                       onChange={() =>
                         setVehicleTypes((s) => toggleInSet(s, o.id))
                       }
-                      className="rounded border-border"
+                      className="h-5 w-5 shrink-0 rounded border-border"
                     />
                     {o.label}
                   </label>
@@ -515,30 +515,33 @@ export default function BusinessPage() {
                 Interested in <span className="text-red-600">*</span>
               </legend>
               <div className="mt-3 space-y-2">
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                <label className="flex min-h-[44px] cursor-pointer items-center gap-3 text-sm">
                   <input
                     type="radio"
                     name="plan"
                     checked={plan === "basic"}
                     onChange={() => setPlan("basic")}
+                    className="h-5 w-5 shrink-0"
                   />
                   Basic (£9.99/month)
                 </label>
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                <label className="flex min-h-[44px] cursor-pointer items-center gap-3 text-sm">
                   <input
                     type="radio"
                     name="plan"
                     checked={plan === "pro"}
                     onChange={() => setPlan("pro")}
+                    className="h-5 w-5 shrink-0"
                   />
                   Pro (£19.99/month)
                 </label>
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                <label className="flex min-h-[44px] cursor-pointer items-center gap-3 text-sm">
                   <input
                     type="radio"
                     name="plan"
                     checked={plan === "not_sure"}
                     onChange={() => setPlan("not_sure")}
+                    className="h-5 w-5 shrink-0"
                   />
                   Not sure yet
                 </label>
@@ -556,7 +559,7 @@ export default function BusinessPage() {
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[120px] w-full rounded-lg border border-border px-3 py-2.5 text-base text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               />
             </div>
 
@@ -574,7 +577,7 @@ export default function BusinessPage() {
             <button
               type="submit"
               disabled={formStatus === "loading"}
-              className="w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
+              className="min-h-[44px] w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
             >
               {formStatus === "loading" ? "Sending…" : "Send enquiry"}
             </button>
@@ -583,14 +586,14 @@ export default function BusinessPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-primary py-14 text-white sm:py-16">
+      <section className="bg-primary py-8 text-white md:py-14 lg:py-16">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl text-balance">
+          <h2 className="font-heading text-xl font-semibold text-white md:text-2xl lg:text-3xl text-balance">
             Ready to stop paying PCNs you don&apos;t owe?
           </h2>
           <a
             href="#enquiry"
-            className="mt-8 inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 text-base font-semibold text-primary no-underline shadow-md hover:bg-white/95"
+            className="mx-auto mt-8 inline-flex min-h-[44px] w-full max-w-sm items-center justify-center rounded-lg bg-white px-8 py-3 text-base font-semibold text-primary no-underline shadow-md hover:bg-white/95 sm:w-auto sm:max-w-none"
           >
             Get started today
           </a>

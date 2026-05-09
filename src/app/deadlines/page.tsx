@@ -199,7 +199,7 @@ function DeadlineCard({
 }) {
   const s = STATUS[urgency];
   return (
-    <li className="flex gap-4 items-stretch">
+    <li className="flex min-w-0 gap-3 items-stretch sm:gap-4">
       <div className="flex w-5 shrink-0 flex-col items-center pt-1.5">
         <div
           className={`z-10 h-3 w-3 shrink-0 rounded-full ${s.dot} ring-4 ${s.ring}`}
@@ -210,9 +210,9 @@ function DeadlineCard({
         ) : null}
       </div>
       <div className={`min-w-0 flex-1 ${isLast ? "pb-0" : "pb-8"}`}>
-        <div className="rounded-lg border border-border bg-background p-4 shadow-sm sm:p-5">
+        <div className="min-w-0 rounded-lg border border-border bg-background p-3 shadow-sm sm:p-5">
           <div className="flex flex-wrap items-start justify-between gap-2">
-            <h3 className="font-heading text-lg font-semibold text-foreground">
+            <h3 className="min-w-0 flex-1 break-words font-heading text-base font-semibold text-foreground sm:text-lg">
               {item.title}
             </h3>
             <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted">
@@ -223,11 +223,13 @@ function DeadlineCard({
               {s.label}
             </span>
           </div>
-          <p className="mt-1 font-mono text-sm font-semibold text-primary">
+          <p className="mt-1 break-words font-mono text-xs font-semibold text-primary sm:text-sm">
             {formatUkDate(item.date)}
           </p>
-          <p className="mt-2 text-sm font-medium text-foreground">{daysPhrase}</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted">
+          <p className="mt-2 break-words text-sm font-medium text-foreground">
+            {daysPhrase}
+          </p>
+          <p className="mt-2 break-words text-sm leading-relaxed text-muted">
             {item.explanation}
           </p>
           {item.note ? (
@@ -420,13 +422,13 @@ export default function DeadlinesPage() {
   }
 
   return (
-    <div className="bg-background">
+    <div className="min-w-0 bg-background">
       <section className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance">
+        <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-16">
+          <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl text-balance">
             PCN deadline tracker
           </h1>
-          <p className="mt-4 text-lg text-muted text-balance">
+          <p className="mt-4 text-base text-muted text-balance md:text-lg">
             Enter when your PCN was issued and how you received it. We map the
             key payment and challenge dates so you can see what is coming — and
             act before you lose options.
@@ -434,7 +436,7 @@ export default function DeadlinesPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl min-w-0 px-4 py-8 sm:px-6 md:py-10 lg:px-8">
         {showRestoredBanner && restoredPcnLabel ? (
           <div
             className="mb-6 flex flex-col gap-2 rounded-lg border border-primary/20 bg-emerald-50/90 px-4 py-3 text-sm text-foreground sm:flex-row sm:items-center sm:justify-between"
@@ -457,7 +459,7 @@ export default function DeadlinesPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-lg border border-border bg-background p-5 shadow-sm sm:p-6"
+          className="rounded-lg border border-border bg-background p-4 shadow-sm sm:p-6"
         >
           <div className="space-y-6">
             <div>
@@ -474,7 +476,7 @@ export default function DeadlinesPage() {
                 required
                 value={issueDate}
                 onChange={(e) => setIssueDate(e.target.value)}
-                className="mt-1 w-full max-w-xs rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full max-w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40 sm:max-w-xs"
               />
             </div>
 
@@ -483,14 +485,14 @@ export default function DeadlinesPage() {
                 How was it issued? <span className="text-red-600">*</span>
               </legend>
               <div className="mt-3 space-y-3">
-                <label className="flex cursor-pointer gap-3 rounded-lg border border-border bg-surface p-3 has-[:checked]:border-primary has-[:checked]:bg-emerald-50/40">
+                <label className="flex min-h-[48px] cursor-pointer items-start gap-3 rounded-lg border border-border bg-surface p-3 has-[:checked]:border-primary has-[:checked]:bg-emerald-50/40">
                   <input
                     type="radio"
                     name="issueMethod"
                     value="reg9"
                     checked={issueMethod === "reg9"}
                     onChange={() => setIssueMethod("reg9")}
-                    className="mt-1"
+                    className="mt-1 h-5 w-5 shrink-0"
                   />
                   <span className="text-sm text-foreground">
                     <span className="font-medium">
@@ -501,14 +503,14 @@ export default function DeadlinesPage() {
                     </span>
                   </span>
                 </label>
-                <label className="flex cursor-pointer gap-3 rounded-lg border border-border bg-surface p-3 has-[:checked]:border-primary has-[:checked]:bg-emerald-50/40">
+                <label className="flex min-h-[48px] cursor-pointer items-start gap-3 rounded-lg border border-border bg-surface p-3 has-[:checked]:border-primary has-[:checked]:bg-emerald-50/40">
                   <input
                     type="radio"
                     name="issueMethod"
                     value="reg10"
                     checked={issueMethod === "reg10"}
                     onChange={() => setIssueMethod("reg10")}
-                    className="mt-1"
+                    className="mt-1 h-5 w-5 shrink-0"
                   />
                   <span className="text-sm text-foreground">
                     <span className="font-medium">Received by post</span>
@@ -536,7 +538,7 @@ export default function DeadlinesPage() {
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
                 placeholder="Shown on your ticket for your records only"
-                className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-foreground placeholder:text-muted/80 focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2 text-foreground placeholder:text-muted/80 focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
               />
             </div>
 
@@ -546,10 +548,10 @@ export default function DeadlinesPage() {
               </p>
             ) : null}
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover"
+                className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover sm:w-auto"
               >
                 Calculate deadlines
               </button>
@@ -557,7 +559,7 @@ export default function DeadlinesPage() {
                 <button
                   type="button"
                   onClick={handleRecalculate}
-                  className="inline-flex items-center justify-center rounded-lg border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-surface"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-surface sm:w-auto"
                 >
                   Recalculate
                 </button>
@@ -585,7 +587,7 @@ export default function DeadlinesPage() {
             {day0Label}
 
             <div>
-              <h2 className="font-heading text-xl font-semibold text-foreground">
+              <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
                 Your timeline
               </h2>
               <p className="mt-1 text-sm text-muted">
@@ -606,7 +608,7 @@ export default function DeadlinesPage() {
             </div>
 
             <section
-              className="rounded-lg border border-emerald-200 bg-[#f0fdf4] p-5 sm:p-6"
+              className="rounded-lg border border-emerald-200 bg-[#f0fdf4] p-4 sm:p-6"
               aria-labelledby="reminder-heading"
             >
               <h2
@@ -662,13 +664,13 @@ export default function DeadlinesPage() {
                       if (reminderStatus !== "idle") setReminderStatus("idle");
                     }}
                     placeholder="you@example.com"
-                    className="mt-1 w-full rounded-lg border border-emerald-200 bg-background px-3 py-2.5 text-foreground placeholder:text-muted/80 focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                    className="mt-1 min-h-[44px] w-full rounded-lg border border-emerald-200 bg-background px-3 py-2.5 text-foreground placeholder:text-muted/80 focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={reminderStatus === "loading"}
-                  className="w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
+                  className="min-h-[44px] w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {reminderStatus === "loading"
                     ? "Sending…"
@@ -717,20 +719,20 @@ export default function DeadlinesPage() {
               procedures vary; read your PCN and any NtO carefully.
             </p>
 
-            <div className="rounded-lg border border-border bg-surface p-6">
+            <div className="rounded-lg border border-border bg-surface p-4 sm:p-6">
               <h2 className="font-heading text-lg font-semibold text-foreground">
                 Ready to challenge before your deadline?
               </h2>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
                   href="/appeal"
-                  className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white no-underline shadow-sm hover:bg-primary-hover"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:w-auto"
                 >
                   Generate your appeal letter — from £6.99
                 </Link>
                 <Link
                   href="/check"
-                  className="inline-flex items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-sm font-semibold text-primary no-underline hover:bg-background"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-sm font-semibold text-primary no-underline hover:bg-background sm:w-auto"
                 >
                   Check if you have grounds
                 </Link>

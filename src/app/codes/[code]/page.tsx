@@ -58,8 +58,8 @@ export default function ContraventionCodePage({ params }: Props) {
   const t = FINE_LEVELS_TABLE;
 
   return (
-    <div className="bg-background">
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+    <div className="min-w-0 bg-background">
+      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
@@ -88,7 +88,7 @@ export default function ContraventionCodePage({ params }: Props) {
         </nav>
 
         <aside
-          className="mt-6 rounded-lg border border-amber-200 border-l-4 border-l-amber-500 bg-[#FFFBEB] p-4 sm:p-5"
+          className="mt-6 rounded-lg border border-amber-200 border-l-4 border-l-amber-500 bg-[#FFFBEB] p-3 sm:p-5"
           aria-label="Important notice"
         >
           <p className="flex items-start gap-2 font-heading text-base font-semibold text-amber-900">
@@ -108,8 +108,8 @@ export default function ContraventionCodePage({ params }: Props) {
           </p>
         </aside>
 
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-          <span className="inline-flex rounded-lg bg-primary px-4 py-2 font-mono text-3xl font-bold text-white sm:text-4xl">
+        <div className="mt-6 flex min-w-0 flex-wrap items-center gap-3">
+          <span className="inline-flex rounded-lg bg-primary px-3 py-2 font-mono text-2xl font-bold text-white sm:px-4 sm:text-4xl">
             {entry.code}
           </span>
           <span
@@ -119,11 +119,11 @@ export default function ContraventionCodePage({ params }: Props) {
           </span>
         </div>
 
-        <h1 className="mt-4 font-heading text-2xl font-semibold leading-tight text-foreground sm:text-3xl text-balance">
+        <h1 className="mt-4 break-words font-heading text-xl font-semibold leading-tight text-foreground sm:text-2xl lg:text-3xl text-balance">
           {entry.title}
         </h1>
 
-        <div className="mt-6 rounded-lg border border-border bg-surface p-5">
+        <div className="mt-6 min-w-0 rounded-lg border border-border bg-surface p-4 sm:p-5">
           <h2 className="font-heading text-lg font-semibold text-foreground">
             Typical fine levels
           </h2>
@@ -134,8 +134,8 @@ export default function ContraventionCodePage({ params }: Props) {
             </span>
             .
           </p>
-          <div className="mt-4 overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[320px] border-collapse text-left text-sm">
+          <div className="mt-4 -mx-1 overflow-x-auto rounded-lg border border-border px-1 sm:mx-0 sm:px-0">
+            <table className="w-full min-w-[280px] border-collapse text-left text-sm sm:min-w-[320px]">
               <caption className="sr-only">
                 Standard parking contravention fine amounts by band and region
               </caption>
@@ -231,7 +231,7 @@ export default function ContraventionCodePage({ params }: Props) {
         </section>
 
         <section
-          className="mt-10 border-l-4 border-accent bg-amber-50/80 pl-5 pr-4 py-5"
+          className="mt-10 border-l-4 border-accent bg-amber-50/80 py-4 pl-4 pr-3 sm:pl-5 sm:pr-4 sm:py-5"
           aria-labelledby="warden-heading"
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-amber-900/80">
@@ -281,7 +281,9 @@ export default function ContraventionCodePage({ params }: Props) {
                     />
                   </svg>
                 </span>
-                <span className="leading-relaxed text-foreground">{item}</span>
+                <span className="min-w-0 break-words leading-relaxed text-foreground">
+                  {item}
+                </span>
               </li>
             ))}
           </ul>
@@ -313,7 +315,7 @@ export default function ContraventionCodePage({ params }: Props) {
           </div>
         ) : null}
 
-        <div className="mt-12 rounded-lg border border-border bg-primary px-6 py-8 text-center text-white">
+        <div className="mt-12 rounded-lg border border-border bg-primary px-4 py-8 text-center text-white sm:px-6">
           <p className="font-heading text-lg font-semibold text-white sm:text-xl">
             Think you have grounds to appeal?
           </p>
@@ -322,7 +324,7 @@ export default function ContraventionCodePage({ params }: Props) {
           </p>
           <Link
             href="/appeal"
-            className="mt-5 inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-primary no-underline shadow-sm hover:bg-surface"
+            className="mt-5 inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-primary no-underline shadow-sm hover:bg-surface sm:w-auto"
           >
             Generate appeal letter
           </Link>

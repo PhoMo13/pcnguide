@@ -34,7 +34,7 @@ export default function HomePage() {
     <div className="bg-background">
       {/* Hero */}
       <section className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-24">
           <p className="mb-4 inline-flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted shadow-sm">
             <span
               className="h-2 w-2 rounded-full bg-primary"
@@ -42,23 +42,23 @@ export default function HomePage() {
             />
             Written by a serving UK traffic warden
           </p>
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance">
+          <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground md:text-4xl lg:text-5xl text-balance">
             Fight Your Parking Fine — With Insider Knowledge
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted text-balance">
+          <p className="mt-5 max-w-2xl text-base text-muted text-balance md:text-lg">
             Built by a serving traffic warden. We know exactly what mistakes get
             fines cancelled.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="/check"
-              className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-base font-semibold text-white no-underline shadow-sm hover:bg-primary-hover"
+              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-base font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:w-auto"
             >
               Check If Your Fine Can Be Cancelled
             </Link>
             <Link
               href="/codes"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-base font-semibold text-primary no-underline hover:bg-surface"
+              className="inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-base font-semibold text-primary no-underline hover:bg-surface sm:w-auto"
             >
               Look Up Your Contravention Code
             </Link>
@@ -67,16 +67,16 @@ export default function HomePage() {
       </section>
 
       {/* How it works */}
-      <section className="border-b border-border py-14 sm:py-16">
+      <section className="border-b border-border py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             How it works
           </h2>
           <p className="mt-2 max-w-2xl text-muted">
             Three straightforward steps from code to a structured appeal you
             can edit and submit.
           </p>
-          <ol className="mt-10 grid gap-6 sm:grid-cols-3">
+          <ol className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 step: "1",
@@ -96,7 +96,7 @@ export default function HomePage() {
             ].map((item) => (
               <li
                 key={item.step}
-                className="relative rounded-lg border border-border bg-background p-6 shadow-sm"
+                className="relative min-w-0 rounded-lg border border-border bg-background p-4 shadow-sm md:p-6"
               >
                 <span className="font-mono text-sm font-semibold text-accent">
                   Step {item.step}
@@ -114,16 +114,16 @@ export default function HomePage() {
       </section>
 
       {/* Why PCNGuide */}
-      <section className="border-b border-border bg-surface py-14 sm:py-16">
+      <section className="border-b border-border bg-surface py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             Why PCNGuide
           </h2>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2">
+          <ul className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
             {whyItems.map((item) => (
               <li
                 key={item.title}
-                className="rounded-lg border border-border bg-background p-6"
+                className="min-w-0 rounded-lg border border-border bg-background p-4 md:p-6"
               >
                 <h3 className="font-heading text-lg font-semibold text-foreground">
                   {item.title}
@@ -138,9 +138,9 @@ export default function HomePage() {
       </section>
 
       {/* Contravention code search */}
-      <section className="border-b border-border py-14 sm:py-16">
+      <section className="border-b border-border py-8 md:py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
             Contravention code search
           </h2>
           <p className="mt-2 max-w-2xl text-muted">
@@ -168,7 +168,7 @@ export default function HomePage() {
             </label>
             <button
               type="submit"
-              className="rounded-lg bg-primary px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-hover sm:shrink-0"
+              className="min-h-[44px] w-full rounded-lg bg-primary px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-hover sm:w-auto sm:shrink-0"
             >
               Search
             </button>
@@ -182,7 +182,7 @@ export default function HomePage() {
                 <li key={code}>
                   <Link
                     href={`/codes?code=${code}`}
-                    className="inline-flex min-w-[2.75rem] items-center justify-center rounded-lg border border-border bg-surface px-3 py-2 font-mono text-sm font-semibold text-primary no-underline hover:border-primary hover:bg-background"
+                    className="inline-flex min-h-[44px] min-w-[2.75rem] items-center justify-center rounded-lg border border-border bg-surface px-3 py-2 font-mono text-sm font-semibold text-primary no-underline hover:border-primary hover:bg-background"
                   >
                     {code}
                   </Link>
@@ -194,10 +194,10 @@ export default function HomePage() {
       </section>
 
       {/* Appeal letter CTA */}
-      <section className="py-14 sm:py-20">
+      <section className="py-8 md:py-14 lg:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-lg border border-border bg-primary px-6 py-10 text-center text-white sm:px-10">
-            <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl">
+          <div className="rounded-lg border border-border bg-primary px-4 py-8 text-center text-white sm:px-10 sm:py-10">
+            <h2 className="font-heading text-xl font-semibold text-white md:text-2xl lg:text-3xl">
               Ready to Appeal?
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-base text-white">
@@ -205,7 +205,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/appeal"
-              className="mt-6 inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-primary no-underline shadow-sm hover:bg-surface"
+              className="mx-auto mt-6 inline-flex min-h-[44px] w-full max-w-md items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-primary no-underline shadow-sm hover:bg-surface sm:mx-0 sm:w-auto sm:max-w-none"
             >
               Generate appeal letter
             </Link>

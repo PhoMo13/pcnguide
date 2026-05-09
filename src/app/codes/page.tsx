@@ -48,8 +48,8 @@ function CodesLookupContent() {
 
   return (
     <div className="bg-background">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-        <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-14">
+        <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl text-balance">
           Contravention Code Lookup
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-muted text-balance">
@@ -57,7 +57,7 @@ function CodesLookupContent() {
           exactly what it means — and how to challenge it.
         </p>
 
-        <div className="mt-8 max-w-xl">
+        <div className="mt-8 w-full max-w-xl">
           <label htmlFor="code-search" className="sr-only">
             Search by code or keyword
           </label>
@@ -78,14 +78,14 @@ function CodesLookupContent() {
             keyword.
           </p>
         ) : (
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((c) => (
               <li key={c.code}>
                 <Link
                   href={`/codes/${c.code}`}
-                  className="flex h-full flex-col rounded-lg border border-border bg-surface p-5 no-underline shadow-sm transition hover:border-primary hover:bg-background hover:shadow-md"
+                  className="flex h-full min-w-0 flex-col rounded-lg border border-border bg-surface p-4 no-underline shadow-sm transition hover:border-primary hover:bg-background hover:shadow-md md:p-5"
                 >
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex min-w-0 items-start justify-between gap-2">
                     <span className="inline-flex items-center rounded-lg bg-primary px-2.5 py-1 font-mono text-lg font-semibold text-white">
                       {c.code}
                     </span>
@@ -95,7 +95,7 @@ function CodesLookupContent() {
                       {c.difficulty}
                     </span>
                   </div>
-                  <h2 className="mt-3 font-heading text-base font-semibold leading-snug text-foreground">
+                  <h2 className="mt-3 break-words font-heading text-base font-semibold leading-snug text-foreground">
                     {c.title}
                   </h2>
                   {c.tags[0] ? (
@@ -114,9 +114,9 @@ function CodesLookupContent() {
 function CodesLookupFallback() {
   return (
     <div className="bg-background">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-14">
         <div className="h-10 max-w-xl animate-pulse rounded-lg bg-surface" />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}

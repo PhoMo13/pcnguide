@@ -300,9 +300,9 @@ export default function CheckPcnPage() {
         : "Your grounds are limited. You can still challenge but should consider whether to pay at the reduced rate.";
 
   return (
-    <div className="min-h-[70vh] bg-background px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mx-auto w-full max-w-[600px]">
-        <p className="text-center font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+    <div className="min-h-[70vh] min-w-0 bg-background px-3 py-8 sm:px-6 sm:py-12 md:py-14">
+      <div className="mx-auto w-full max-w-[600px] min-w-0">
+        <p className="text-center font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
           PCN Checker
         </p>
         <p className="mt-2 text-center text-sm text-muted">
@@ -334,7 +334,7 @@ export default function CheckPcnPage() {
 
         <div
           key={view}
-          className="animate-step-in mt-10 rounded-lg border border-border bg-background p-6 shadow-sm sm:p-8"
+          className="animate-step-in mt-8 rounded-lg border border-border bg-background p-4 shadow-sm sm:mt-10 sm:p-6 md:p-8"
         >
           {view === "step-1" && (
             <StepShell
@@ -697,13 +697,13 @@ export default function CheckPcnPage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
                   href="/appeal"
-                  className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:flex-none sm:min-w-[200px]"
+                  className="inline-flex min-h-[44px] w-full flex-1 items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:w-auto sm:flex-none sm:min-w-[200px]"
                 >
                   Generate your appeal letter — from £6.99
                 </Link>
                 <Link
                   href="/codes"
-                  className="inline-flex flex-1 items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-sm font-semibold text-primary no-underline hover:bg-surface sm:flex-none sm:min-w-[200px]"
+                  className="inline-flex min-h-[44px] w-full flex-1 items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-sm font-semibold text-primary no-underline hover:bg-surface sm:w-auto sm:flex-none sm:min-w-[200px]"
                 >
                   Look up your contravention code
                 </Link>
@@ -755,7 +755,7 @@ function StepShell({
           {backLabel}
         </button>
       ) : null}
-      <h2 className="font-heading text-xl font-semibold text-foreground">
+      <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
         {title}
       </h2>
       {subtitle ? (
@@ -784,7 +784,7 @@ function OptionList<T extends string>({
             <button
               type="button"
               onClick={() => onSelect(opt.id)}
-              className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
+              className={`min-h-[44px] w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition-colors ${
                 selected
                   ? "border-primary bg-emerald-50/80 text-primary ring-1 ring-primary/20"
                   : "border-border bg-surface text-foreground hover:border-primary/40 hover:bg-background"
@@ -818,7 +818,7 @@ function CheckboxGroup<
         return (
           <label
             key={item.key}
-            className={`flex cursor-pointer items-start gap-3 rounded-lg border-2 px-4 py-3 text-sm transition-colors ${
+            className={`flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg border-2 px-4 py-3 text-sm transition-colors ${
               isOn
                 ? "border-primary bg-emerald-50/80 ring-1 ring-primary/20"
                 : "border-border bg-surface hover:border-primary/40"
@@ -828,7 +828,7 @@ function CheckboxGroup<
               type="checkbox"
               checked={isOn}
               onChange={() => onToggle(item.key)}
-              className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-primary focus:ring-accent"
+              className="mt-1 h-5 w-5 shrink-0 rounded border-border text-primary focus:ring-accent"
             />
             <span className="text-foreground">{item.label}</span>
           </label>

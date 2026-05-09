@@ -78,21 +78,21 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-background">
+    <div className="min-w-0 bg-background">
       <section className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-16">
+          <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground md:text-3xl lg:text-4xl">
             Contact PCNGuide
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted">
+          <p className="mt-4 max-w-2xl text-base text-muted md:text-lg">
             Get in touch — we aim to respond within two working days.
           </p>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+      <div className="mx-auto max-w-6xl min-w-0 px-4 py-8 sm:px-6 md:py-12 lg:px-8 lg:py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+          <div className="min-w-0">
             <h2 className="font-heading text-lg font-semibold text-foreground">
               Why you might contact us
             </h2>
@@ -108,13 +108,13 @@ export default function ContactPage() {
             </ul>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2 className="font-heading text-lg font-semibold text-foreground">
               Send a message
             </h2>
             <form
               onSubmit={handleSubmit}
-              className="mt-6 space-y-5 rounded-xl border border-border bg-background p-6 shadow-sm sm:p-8"
+              className="mt-6 space-y-5 rounded-xl border border-border bg-background p-4 shadow-sm sm:p-6 md:p-8"
             >
               <div>
                 <label
@@ -129,7 +129,7 @@ export default function ContactPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                  className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
                 />
               </div>
               <div>
@@ -146,7 +146,7 @@ export default function ContactPage() {
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                  className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
                 />
               </div>
               <div>
@@ -161,7 +161,7 @@ export default function ContactPage() {
                   required
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                  className="mt-1 min-h-[44px] w-full rounded-lg border border-border bg-background px-3 py-2.5 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
                 >
                   {SUBJECT_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
@@ -212,7 +212,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={status === "loading" || message.trim().length < 20}
-                className="w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+                className="min-h-[44px] w-full rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === "loading" ? "Sending…" : "Send message"}
               </button>

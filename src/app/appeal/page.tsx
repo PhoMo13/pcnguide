@@ -390,7 +390,7 @@ function CouncilAutocomplete({
         onFocus={() => setOpen(true)}
         onKeyDown={onKeyDown}
         placeholder="Start typing council name…"
-        className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+        className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
       />
       {showDropdown ? (
         <ul
@@ -659,9 +659,9 @@ export default function AppealPage() {
   };
 
   return (
-    <div className="min-h-[70vh] bg-background px-4 py-10 sm:px-6 sm:py-14">
-      <div className="mx-auto w-full max-w-[640px]">
-        <h1 className="text-center font-heading text-2xl font-semibold text-foreground sm:text-3xl">
+    <div className="min-h-[70vh] min-w-0 bg-background px-3 py-8 sm:px-6 sm:py-12 md:py-14">
+      <div className="mx-auto w-full max-w-[640px] min-w-0">
+        <h1 className="text-center font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
           Appeal letter generator
         </h1>
         <p className="mt-2 text-center text-sm text-muted">
@@ -683,11 +683,11 @@ export default function AppealPage() {
 
         <div
           key={step}
-          className="animate-step-in mt-10 rounded-lg border border-border bg-background p-6 shadow-sm sm:p-8"
+          className="animate-step-in mt-8 rounded-lg border border-border bg-background p-4 shadow-sm sm:mt-10 sm:p-6 md:p-8"
         >
           {step === 1 && (
             <StepShell title="Choose your tier" onBack={goBack} backLabel="← Home">
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <TierCard
                   title="Standard"
                   price="£6.99"
@@ -746,7 +746,7 @@ export default function AppealPage() {
                     required
                     value={pcnDate}
                     onChange={(e) => setPcnDate(e.target.value)}
-                    className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                    className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
                   />
                 </div>
                 <Field
@@ -775,7 +775,7 @@ export default function AppealPage() {
                     value={contraventionCode}
                     onChange={(e) => setContraventionCode(e.target.value)}
                     placeholder="e.g. 01, 30, 45"
-                    className="mt-1 w-full rounded-lg border border-border px-3 py-2 font-mono text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+                    className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2 font-mono text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
                   />
                   <p className="mt-1 text-xs text-muted">
                     <Link
@@ -803,7 +803,7 @@ export default function AppealPage() {
                   type="button"
                   disabled={!validateStep2}
                   onClick={() => setStep(3)}
-                  className="mt-4 w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
+                  className="mt-4 min-h-[44px] w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
                 >
                   Continue
                 </button>
@@ -820,7 +820,7 @@ export default function AppealPage() {
                 {GROUND_OPTIONS.map((g) => (
                   <li key={g.id}>
                     <label
-                      className={`flex cursor-pointer items-start gap-3 rounded-lg border-2 px-3 py-2.5 text-sm ${
+                      className={`flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg border-2 px-3 py-2.5 text-sm ${
                         grounds.has(g.id)
                           ? "border-primary bg-emerald-50/80 ring-1 ring-primary/20"
                           : "border-border bg-surface"
@@ -830,7 +830,7 @@ export default function AppealPage() {
                         type="checkbox"
                         checked={grounds.has(g.id)}
                         onChange={() => toggleGround(g.id)}
-                        className="mt-0.5 h-4 w-4 rounded border-border text-primary"
+                        className="mt-1 h-5 w-5 shrink-0 rounded border-border text-primary"
                       />
                       <span>{g.label}</span>
                     </label>
@@ -850,7 +850,7 @@ export default function AppealPage() {
                 type="button"
                 disabled={!validateStep3}
                 onClick={() => setStep(4)}
-                className="mt-6 w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
+                className="mt-6 min-h-[44px] w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
               >
                 Continue
               </button>
@@ -863,7 +863,7 @@ export default function AppealPage() {
                 {EVIDENCE_OPTIONS.map((e) => (
                   <li key={e.id}>
                     <label
-                      className={`flex cursor-pointer items-start gap-3 rounded-lg border-2 px-3 py-2.5 text-sm ${
+                      className={`flex min-h-[44px] cursor-pointer items-start gap-3 rounded-lg border-2 px-3 py-2.5 text-sm ${
                         evidence.has(e.id)
                           ? "border-primary bg-emerald-50/80 ring-1 ring-primary/20"
                           : "border-border bg-surface"
@@ -873,7 +873,7 @@ export default function AppealPage() {
                         type="checkbox"
                         checked={evidence.has(e.id)}
                         onChange={() => toggleEvidence(e.id)}
-                        className="mt-0.5 h-4 w-4 rounded border-border text-primary"
+                        className="mt-1 h-5 w-5 shrink-0 rounded border-border text-primary"
                       />
                       <span>{e.label}</span>
                     </label>
@@ -899,7 +899,7 @@ export default function AppealPage() {
                 type="button"
                 disabled={!validateStep4}
                 onClick={() => setStep(5)}
-                className="mt-6 w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
+                className="mt-6 min-h-[44px] w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
               >
                 Continue
               </button>
@@ -908,7 +908,7 @@ export default function AppealPage() {
 
           {step === 5 && tier && (
             <StepShell title="Payment" onBack={goBack}>
-              <div className="rounded-lg border border-border bg-surface p-4">
+              <div className="w-full min-w-0 rounded-lg border border-border bg-surface p-4">
                 <h3 className="font-heading text-lg font-semibold text-foreground">
                   Order summary
                 </h3>
@@ -975,7 +975,7 @@ export default function AppealPage() {
                     <div className="mt-4 space-y-2 opacity-50 pointer-events-none">
                       <div className="h-10 rounded-lg border border-border bg-white" />
                       <div className="h-10 rounded-lg border border-border bg-white" />
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                         <div className="h-10 rounded-lg border border-border bg-white" />
                         <div className="h-10 rounded-lg border border-border bg-white" />
                       </div>
@@ -984,7 +984,7 @@ export default function AppealPage() {
                       type="button"
                       disabled={submitting}
                       onClick={runGeneration}
-                      className="mt-6 w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
+                      className="mt-6 min-h-[44px] w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
                     >
                       Generate my appeal letter
                     </button>
@@ -1059,7 +1059,7 @@ function LivePaymentForm({
         type="button"
         onClick={() => void handle()}
         disabled={disabled || !stripe}
-        className="mt-6 w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
+        className="mt-6 min-h-[44px] w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50"
       >
         Generate my appeal letter
       </button>
@@ -1116,7 +1116,7 @@ function TierCard({
       <button
         type="button"
         onClick={onSelect}
-        className="mt-6 w-full rounded-lg border-2 border-primary bg-primary py-2.5 text-sm font-semibold text-white hover:bg-primary-hover"
+        className="mt-6 min-h-[44px] w-full rounded-lg border-2 border-primary bg-primary py-2.5 text-sm font-semibold text-white hover:bg-primary-hover"
       >
         {cta}
       </button>
@@ -1144,7 +1144,7 @@ function StepShell({
       >
         {backLabel}
       </button>
-      <h2 className="font-heading text-xl font-semibold text-foreground">
+      <h2 className="font-heading text-lg font-semibold text-foreground md:text-xl">
         {title}
       </h2>
       <div className="mt-6">{children}</div>
@@ -1175,7 +1175,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+        className="mt-1 min-h-[44px] w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
       />
     </div>
   );
