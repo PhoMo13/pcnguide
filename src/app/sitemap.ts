@@ -59,6 +59,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: "https://www.pcnguide.co.uk/faq",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://www.pcnguide.co.uk/appeal-stages",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://www.pcnguide.co.uk/about",
       lastModified: new Date(),
       changeFrequency: "yearly",
