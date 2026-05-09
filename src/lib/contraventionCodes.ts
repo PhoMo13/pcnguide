@@ -655,20 +655,34 @@ export const CODES: ContraventionCode[] = [
     code: "46",
     title: "Stopped where prohibited on a red route or clearway",
     description:
-      "Stopped on a red route or clearway where stopping is strictly prohibited at that time.",
+      "Your vehicle stopped, waited or parked on a red route or clearway where stopping is prohibited. Red routes are marked with single or double red lines. Double red lines mean no stopping at any time. Single red lines mean no stopping during the hours shown on nearby signs.",
     wardenNote:
-      "Red routes are the most strictly enforced routes in the country, primarily in London. No stopping means no stopping — not even briefly for a delivery. Double red lines mean no stopping at any time. Single red lines have restricted hours shown on signs.",
+      "Red routes are the most strictly enforced roads in the country. Double reds operate 24 hours a day, 7 days a week — there are no exemptions for loading, no Blue Badge exemptions, and no grace period. Single reds have signed hours — check the sign carefully. Unlike yellow lines, you cannot load on a double red line. Licensed taxis can stop briefly to set down or pick up passengers. CCTV is the primary enforcement method on red routes — you may not receive the PCN until weeks later.",
     commonMistakes: [
-      "Hours of operation not checked",
-      "Brief stop assumed permissible",
-      "Loading exemption assumed but doesn't apply on red routes",
-      "Sign obscured",
+      "Assumed loading was permitted — it is not on double red lines",
+      "Blue Badge assumed to give exemption — it does not on double reds",
+      "Single red hours not checked before stopping",
+      "PCN received weeks later by post — CCTV enforcement",
+      "Assumed brief stop was permitted",
     ],
     yourRights:
-      "Check the hours on the signs carefully. Double reds operate 24/7. Single reds have hours — if the sign was unclear, challenge.",
-    fineAmount: fineAmountBandA(),
+      "For single red lines — check the hours on the signs. If the restriction was not in force at the time, challenge. For double red lines — grounds are very limited. Defective or missing road markings, or a genuine emergency where you had no choice but to stop, are the main challenge grounds. If you received the PCN by post (CCTV), check it was issued within 28 days of the contravention.",
+    fineAmount: {
+      bandDescription:
+        "This contravention is typically enforced at Band A (higher level).",
+      outsideLondon: { reduced: 50, full: 100 },
+      londonBandA: LONDON_BAND_A,
+      londonBandB: LONDON_BAND_B,
+      note: "The fine amount for this code varies significantly. TfL (Transport for London) red route PCNs are £160 full / £80 reduced. Council-issued red route PCNs outside London follow standard Band A rates (£70 full / £35 reduced typically). Always check the issuing authority on your PCN. London red route PCNs issued by TfL are £160 (reduced to £80 if paid within 14 days) — significantly higher than standard council PCNs. Outside London, standard Band A rates apply.",
+    },
     difficulty: "Hard",
-    tags: ["red route", "clearway", "no stopping"],
+    tags: [
+      "red route",
+      "double red line",
+      "single red line",
+      "clearway",
+      "no stopping",
+    ],
   },
   {
     code: "47",
