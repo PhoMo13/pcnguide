@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "PCNGuide privacy policy — how we collect, use and protect your data.",
+  alternates: { canonical: "https://www.pcnguide.co.uk/privacy" },
+};
 
 function ExternalLink({
   href,

@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "PCNGuide — UK Parking Fine Appeals | Insider Warden Knowledge",
+  description:
+    "Beat your parking fine with insider knowledge from a serving traffic warden. Free contravention code lookup, PCN checker, deadline tracker and AI-powered appeal letter generator.",
+  alternates: { canonical: "https://www.pcnguide.co.uk" },
+};
 
 const popularCodes = ["01", "30", "45", "62", "74", "86"] as const;
 

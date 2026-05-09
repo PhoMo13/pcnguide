@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "PCNGuide terms of service — information only, not legal advice. Appeal letter service terms and conditions.",
+  alternates: { canonical: "https://www.pcnguide.co.uk/terms" },
+};
+
 export default function TermsPage() {
   return (
     <div className="bg-background">

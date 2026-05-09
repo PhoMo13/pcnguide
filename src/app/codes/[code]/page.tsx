@@ -11,6 +11,24 @@ import {
 
 type Props = { params: { code: string } };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { code: string };
+}): Promise<Metadata> {
+  const entry = getContraventionByCodeParam(params.code);
+  if (!entry) {
+    return { title: "Contravention Code Not Found" };
+  }
+  return {
+    title: `Code ${entry.code} — ${entry.title}`,
+    description: `What contravention code ${entry.code} means, what wardens must check before issuing, common mistakes, and how to challenge it. ${entry.description}`,
+    alternates: {
+      canonical: `https://www.pcnguide.co.uk/codes/${entry.code}`,
+    },
+  };
+}
+
 function difficultyBadgeClass(d: ContraventionCode["difficulty"]) {
   switch (d) {
     case "Easy":
@@ -26,17 +44,6 @@ function difficultyBadgeClass(d: ContraventionCode["difficulty"]) {
 
 export function generateStaticParams() {
   return CODES.map((c) => ({ code: c.code }));
-}
-
-export function generateMetadata({ params }: Props): Metadata {
-  const entry = getContraventionByCodeParam(params.code);
-  if (!entry) {
-    return { title: "Code not found | PCNGuide" };
-  }
-  return {
-    title: `Code ${entry.code}: ${entry.title} | PCNGuide`,
-    description: entry.description,
-  };
 }
 
 function formatFinePair(amounts: { reduced: number; full: number }) {

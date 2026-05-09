@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About PCNGuide — Built by a Serving Traffic Warden",
+  description:
+    "PCNGuide is built by a serving Civil Enforcement Officer in Greater Manchester. Insider knowledge of how PCNs are issued and what gets them cancelled.",
+  alternates: { canonical: "https://www.pcnguide.co.uk/about" },
+};
 
 const approachCards = [
   {
