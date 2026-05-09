@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   CODES,
+  FINE_LEVELS_TABLE,
   getContraventionByCodeParam,
+  TYPICAL_BAND_A_CODES,
   type ContraventionCode,
 } from "@/lib/contraventionCodes";
 
@@ -37,9 +39,16 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
+function formatFinePair(amounts: { reduced: number; full: number }) {
+  return `£${amounts.reduced} / £${amounts.full}`;
+}
+
 export default function ContraventionCodePage({ params }: Props) {
   const entry = getContraventionByCodeParam(params.code);
   if (!entry) notFound();
+
+  const isTypicalBandA = TYPICAL_BAND_A_CODES.has(entry.code);
+  const t = FINE_LEVELS_TABLE;
 
   return (
     <div className="bg-background">
@@ -71,6 +80,27 @@ export default function ContraventionCodePage({ params }: Props) {
           </ol>
         </nav>
 
+        <aside
+          className="mt-6 rounded-lg border border-amber-200 border-l-4 border-l-amber-500 bg-[#FFFBEB] p-4 sm:p-5"
+          aria-label="Important notice"
+        >
+          <p className="flex items-start gap-2 font-heading text-base font-semibold text-amber-900">
+            <span className="select-none" aria-hidden>
+              ⚠️
+            </span>
+            <span>Important — please read</span>
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-foreground">
+            The information on this page is provided to help you understand your
+            options. It is not legal advice. Appeal outcomes vary — councils and
+            adjudicators assess each case individually, and there is no guarantee
+            of success. Rules and restrictions also vary between councils; what
+            applies in one area may not apply in another. Always read the guidance
+            issued with your PCN and verify details with your local council or an
+            independent advisor.
+          </p>
+        </aside>
+
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <span className="inline-flex rounded-lg bg-primary px-4 py-2 font-mono text-3xl font-bold text-white sm:text-4xl">
             {entry.code}
@@ -87,21 +117,99 @@ export default function ContraventionCodePage({ params }: Props) {
         </h1>
 
         <div className="mt-6 rounded-lg border border-border bg-surface p-5">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">
-            Typical fine ({entry.fineAmount.band})
+          <h2 className="font-heading text-lg font-semibold text-foreground">
+            Typical fine levels
           </h2>
-          <p className="mt-2 text-foreground">
-            <span className="font-semibold">Reduced (paid promptly):</span>{" "}
-            £{entry.fineAmount.reduced}
+          <p className="mt-2 text-sm leading-relaxed text-muted">
+            {entry.fineAmount.bandDescription} Amounts are shown as{" "}
+            <span className="font-medium text-foreground">
+              reduced (paid promptly) / full
+            </span>
+            .
           </p>
-          <p className="mt-1 text-foreground">
-            <span className="font-semibold">Full amount:</span> £
-            {entry.fineAmount.full}
+          <div className="mt-4 overflow-x-auto rounded-lg border border-border">
+            <table className="w-full min-w-[320px] border-collapse text-left text-sm">
+              <caption className="sr-only">
+                Standard parking contravention fine amounts by band and region
+              </caption>
+              <thead>
+                <tr className="border-b border-border bg-background">
+                  <th
+                    scope="col"
+                    className="px-3 py-3 font-semibold text-foreground sm:px-4"
+                  >
+                    Band
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3 font-semibold text-foreground sm:px-4"
+                  >
+                    Outside London
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3 font-semibold text-foreground sm:px-4"
+                  >
+                    London
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  className={`border-b border-border ${isTypicalBandA ? "bg-amber-50/90" : ""}`}
+                >
+                  <th
+                    scope="row"
+                    className="px-3 py-3 font-semibold text-foreground sm:px-4"
+                  >
+                    Band A (higher)
+                    {isTypicalBandA ? (
+                      <span className="mt-1 block text-xs font-normal text-amber-900">
+                        Typical for this code
+                      </span>
+                    ) : null}
+                  </th>
+                  <td className="px-3 py-3 font-mono text-foreground sm:px-4">
+                    {formatFinePair(t.outsideLondon.bandA)}
+                  </td>
+                  <td className="px-3 py-3 font-mono text-foreground sm:px-4">
+                    {entry.fineAmount.londonBandA
+                      ? formatFinePair(entry.fineAmount.londonBandA)
+                      : formatFinePair(t.london.bandA)}
+                  </td>
+                </tr>
+                <tr className={!isTypicalBandA ? "bg-amber-50/90" : ""}>
+                  <th
+                    scope="row"
+                    className="px-3 py-3 font-semibold text-foreground sm:px-4"
+                  >
+                    Band B (lower)
+                    {!isTypicalBandA ? (
+                      <span className="mt-1 block text-xs font-normal text-amber-900">
+                        Typical for this code
+                      </span>
+                    ) : null}
+                  </th>
+                  <td className="px-3 py-3 font-mono text-foreground sm:px-4">
+                    {formatFinePair(t.outsideLondon.bandB)}
+                  </td>
+                  <td className="px-3 py-3 font-mono text-foreground sm:px-4">
+                    {entry.fineAmount.londonBandB
+                      ? formatFinePair(entry.fineAmount.londonBandB)
+                      : formatFinePair(t.london.bandB)}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-muted">
+            Fine amounts vary by council. The amounts shown are the standard
+            levels set under the Civil Enforcement of Parking Contraventions
+            regulations. Always check the exact amount on your Penalty Charge
+            Notice.
           </p>
-          <p className="mt-3 text-xs text-muted">
-            Amounts vary by council area and whether the PCN is issued in
-            London; always check your notice and the council&apos;s published
-            charges.
+          <p className="mt-3 text-xs leading-relaxed text-muted">
+            {entry.fineAmount.note}
           </p>
         </div>
 

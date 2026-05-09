@@ -28,8 +28,11 @@ export function Footer() {
           ))}
         </nav>
         <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted">
-          PCNGuide provides information only. This is not legal advice. Always
-          verify information with official sources.
+          PCNGuide provides information and tools to help you understand parking
+          enforcement and prepare appeals. This is not legal advice. Information
+          is for guidance only and may not reflect the specific rules of your
+          local council. Appeal outcomes cannot be guaranteed. Always check your
+          PCN and any correspondence from your council carefully.
         </p>
         <p className="mt-4 text-sm text-muted">
           © {year} PCNGuide. All rights reserved.

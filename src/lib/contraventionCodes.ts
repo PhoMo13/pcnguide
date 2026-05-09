@@ -1,3 +1,41 @@
+export type FineAmount = {
+  bandDescription: string;
+  outsideLondon: { reduced: number; full: number };
+  londonBandA: { reduced: number; full: number } | null;
+  londonBandB: { reduced: number; full: number } | null;
+  note: string;
+};
+
+const FINE_NOTE =
+  "Fine amounts are set by your issuing council and may differ. Always check the amount stated on your actual PCN.";
+
+const LONDON_BAND_A = { reduced: 65, full: 130 };
+const LONDON_BAND_B = { reduced: 50, full: 100 };
+
+/** Band A (higher): outside London £50 / £100; London £65 / £130 */
+function fineAmountBandA(): FineAmount {
+  return {
+    bandDescription:
+      "This contravention is typically enforced at Band A (higher level).",
+    outsideLondon: { reduced: 50, full: 100 },
+    londonBandA: LONDON_BAND_A,
+    londonBandB: LONDON_BAND_B,
+    note: FINE_NOTE,
+  };
+}
+
+/** Band B (lower): outside London £25 / £50; London £50 / £100 */
+function fineAmountBandB(): FineAmount {
+  return {
+    bandDescription:
+      "This contravention is typically enforced at Band B (lower level).",
+    outsideLondon: { reduced: 25, full: 50 },
+    londonBandA: LONDON_BAND_A,
+    londonBandB: LONDON_BAND_B,
+    note: FINE_NOTE,
+  };
+}
+
 export type ContraventionCode = {
   code: string;
   title: string;
@@ -5,7 +43,7 @@ export type ContraventionCode = {
   wardenNote: string;
   commonMistakes: string[];
   yourRights: string;
-  fineAmount: { band: string; reduced: number; full: number };
+  fineAmount: FineAmount;
   difficulty: "Easy" | "Moderate" | "Hard";
   tags: string[];
 };
@@ -27,7 +65,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "You have the right to see the council's Traffic Regulation Order (TRO). If the signage doesn't match the TRO, the PCN should be cancelled.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Moderate",
     tags: ["yellow lines", "restricted street", "time plate"],
   },
@@ -47,7 +85,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "If you were actively loading or unloading, and the CEO did not observe for long enough to confirm this wasn't happening, you have grounds to challenge.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Moderate",
     tags: ["loading bay", "kerb marks", "loading restriction"],
   },
@@ -68,7 +106,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "If your permit was valid but not clearly displayed due to it falling, some councils will accept this as mitigating circumstances, especially for first offences.",
-    fineAmount: { band: "Band A Outside London", reduced: 50, full: 100 },
+    fineAmount: fineAmountBandA(),
     difficulty: "Hard",
     tags: ["residents permit", "parking permit", "residents bay"],
   },
@@ -86,7 +124,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "If you have a valid permit registered digitally, request evidence the CEO checked the virtual permit system before issuing.",
-    fineAmount: { band: "Band A Outside London", reduced: 50, full: 100 },
+    fineAmount: fineAmountBandA(),
     difficulty: "Moderate",
     tags: ["permit", "permit bay", "no permit"],
   },
@@ -105,7 +143,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "Request the CEO's observation notes and photos. If the first observation isn't evidenced, challenge on procedural grounds.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Easy",
     tags: ["overstay", "limited waiting", "time limit"],
   },
@@ -125,7 +163,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "If the badge was valid and properly displayed but the CEO missed it, provide photographic evidence if you have it.",
-    fineAmount: { band: "Band A Outside London", reduced: 50, full: 100 },
+    fineAmount: fineAmountBandA(),
     difficulty: "Hard",
     tags: ["blue badge", "disabled bay", "disabled parking"],
   },
@@ -144,7 +182,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "CEOs should allow reasonable time to establish loading isn't taking place. Ask for the CEO's observation log — if observation was under 5 minutes, challenge.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Easy",
     tags: ["loading bay", "no loading", "observation time"],
   },
@@ -163,7 +201,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "Outside London, check whether your council has a specific TRO in place for that road. Without one, this code may not apply.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Hard",
     tags: ["pavement parking", "footway", "wheel on kerb"],
   },
@@ -181,7 +219,7 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "Challenge if signage wasn't clear or if the CEO cannot evidence they witnessed actual selling activity.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Easy",
     tags: ["selling from vehicle", "market", "trade"],
   },
@@ -200,11 +238,26 @@ export const CODES: ContraventionCode[] = [
     ],
     yourRights:
       "Request the CEO's photographs. If markings are worn, this is a valid challenge. The vehicle must be clearly and unambiguously beyond the bay.",
-    fineAmount: { band: "Band B Outside London", reduced: 25, full: 50 },
+    fineAmount: fineAmountBandB(),
     difficulty: "Easy",
     tags: ["bay markings", "overhang", "parking bay"],
   },
 ];
+
+/** Standard comparison-table amounts (Civil Enforcement of Parking Contraventions levels). */
+export const FINE_LEVELS_TABLE = {
+  outsideLondon: {
+    bandA: { reduced: 50, full: 100 },
+    bandB: { reduced: 25, full: 50 },
+  },
+  london: {
+    bandA: { reduced: 65, full: 130 },
+    bandB: { reduced: 50, full: 100 },
+  },
+} as const;
+
+/** Codes typically charged at Band A (higher) outside London. */
+export const TYPICAL_BAND_A_CODES = new Set(["12", "16", "40"]);
 
 /** Normalise URL param e.g. "1" → "01", invalid → null */
 export function normalizeContraventionCodeParam(param: string): string | null {
