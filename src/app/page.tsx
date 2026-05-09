@@ -43,7 +43,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Link
-              href="/check-pcn"
+              href="/check"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-base font-semibold text-white no-underline shadow-sm hover:bg-primary-hover"
             >
               Check If Your Fine Can Be Cancelled
