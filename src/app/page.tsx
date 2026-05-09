@@ -49,7 +49,7 @@ export default function HomePage() {
               Check If Your Fine Can Be Cancelled
             </Link>
             <Link
-              href="/code-lookup"
+              href="/codes"
               className="inline-flex items-center justify-center rounded-lg border-2 border-primary bg-background px-5 py-3 text-center text-base font-semibold text-primary no-underline hover:bg-surface"
             >
               Look Up Your Contravention Code
@@ -141,7 +141,7 @@ export default function HomePage() {
           </p>
           <form
             className="mt-8 flex max-w-xl flex-col gap-3 sm:flex-row sm:items-end"
-            action="/code-lookup"
+            action="/codes"
             method="get"
             role="search"
           >
@@ -173,7 +173,7 @@ export default function HomePage() {
               {popularCodes.map((code) => (
                 <li key={code}>
                   <Link
-                    href={`/code-lookup?code=${code}`}
+                    href={`/codes?code=${code}`}
                     className="inline-flex min-w-[2.75rem] items-center justify-center rounded-lg border border-border bg-surface px-3 py-2 font-mono text-sm font-semibold text-primary no-underline hover:border-primary hover:bg-background"
                   >
                     {code}
