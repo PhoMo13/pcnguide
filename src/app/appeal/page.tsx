@@ -4,7 +4,7 @@ import { Elements, CardElement, useElements, useStripe } from "@stripe/react-str
 import { loadStripe } from "@stripe/stripe-js";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type { AppealData, AppealTier } from "@/lib/letterPrompt";
 import { getContraventionByCodeParam, normalizeContraventionCodeParam } from "@/lib/contraventionCodes";
@@ -86,6 +86,350 @@ const EVIDENCE_OPTIONS = [
   },
   { id: "none", label: "None of the above" },
 ] as const;
+
+const UK_COUNCILS = [
+  "Barking and Dagenham Council",
+  "Barnet Council",
+  "Barnsley Metropolitan Borough Council",
+  "Bath and North East Somerset Council",
+  "Bedford Borough Council",
+  "Bexley Council",
+  "Birmingham City Council",
+  "Blackburn with Darwen Borough Council",
+  "Blackpool Council",
+  "Bolton Metropolitan Borough Council",
+  "Bournemouth, Christchurch and Poole Council",
+  "Bradford Metropolitan District Council",
+  "Brent Council",
+  "Brighton and Hove City Council",
+  "Bristol City Council",
+  "Bromley Council",
+  "Buckinghamshire Council",
+  "Bury Metropolitan Borough Council",
+  "Calderdale Metropolitan Borough Council",
+  "Cambridge City Council",
+  "Camden Council",
+  "Central Bedfordshire Council",
+  "Cheshire East Council",
+  "Cheshire West and Chester Council",
+  "City of London Corporation",
+  "City of Westminster Council",
+  "Cornwall Council",
+  "Coventry City Council",
+  "Croydon Council",
+  "Cumberland Council",
+  "Darlington Borough Council",
+  "Derby City Council",
+  "Doncaster Metropolitan Borough Council",
+  "Dudley Metropolitan Borough Council",
+  "Durham County Council",
+  "Ealing Council",
+  "East Riding of Yorkshire Council",
+  "East Sussex County Council",
+  "Enfield Council",
+  "Essex County Council",
+  "Gateshead Metropolitan Borough Council",
+  "Greenwich Council",
+  "Hackney Council",
+  "Halton Borough Council",
+  "Hammersmith and Fulham Council",
+  "Haringey Council",
+  "Harrow Council",
+  "Hartlepool Borough Council",
+  "Havering Council",
+  "Herefordshire Council",
+  "Hertfordshire County Council",
+  "Hillingdon Council",
+  "Hounslow Council",
+  "Isle of Wight Council",
+  "Islington Council",
+  "Kensington and Chelsea Council",
+  "Kingston upon Hull City Council",
+  "Kingston upon Thames Council",
+  "Kirklees Metropolitan Borough Council",
+  "Knowsley Metropolitan Borough Council",
+  "Lambeth Council",
+  "Leeds City Council",
+  "Leicester City Council",
+  "Lewisham Council",
+  "Lincolnshire County Council",
+  "Liverpool City Council",
+  "Luton Borough Council",
+  "Manchester City Council",
+  "Medway Council",
+  "Merton Council",
+  "Middlesbrough Borough Council",
+  "Milton Keynes City Council",
+  "Newcastle upon Tyne City Council",
+  "Newham Council",
+  "Norfolk County Council",
+  "North East Lincolnshire Council",
+  "North Lincolnshire Council",
+  "North Northamptonshire Council",
+  "North Somerset Council",
+  "North Tyneside Metropolitan Borough Council",
+  "North Yorkshire Council",
+  "Northumberland County Council",
+  "Nottingham City Council",
+  "Nottinghamshire County Council",
+  "Oldham Metropolitan Borough Council",
+  "Oxford City Council",
+  "Peterborough City Council",
+  "Plymouth City Council",
+  "Portsmouth City Council",
+  "Reading Borough Council",
+  "Redbridge Council",
+  "Redcar and Cleveland Borough Council",
+  "Richmond upon Thames Council",
+  "Rochdale Metropolitan Borough Council",
+  "Rotherham Metropolitan Borough Council",
+  "Rutland County Council",
+  "Salford City Council",
+  "Sandwell Metropolitan Borough Council",
+  "Sefton Metropolitan Borough Council",
+  "Sheffield City Council",
+  "Shropshire Council",
+  "Slough Borough Council",
+  "Solihull Metropolitan Borough Council",
+  "Somerset Council",
+  "South Gloucestershire Council",
+  "South Tyneside Metropolitan Borough Council",
+  "Southampton City Council",
+  "Southend-on-Sea City Council",
+  "Southwark Council",
+  "St Helens Metropolitan Borough Council",
+  "Staffordshire County Council",
+  "Stockport Metropolitan Borough Council",
+  "Stockton-on-Tees Borough Council",
+  "Stoke-on-Trent City Council",
+  "Suffolk County Council",
+  "Sunderland City Council",
+  "Surrey County Council",
+  "Sutton Council",
+  "Swindon Borough Council",
+  "Tameside Metropolitan Borough Council",
+  "Thurrock Council",
+  "Torbay Council",
+  "Tower Hamlets Council",
+  "Trafford Metropolitan Borough Council",
+  "Transport for London (TfL)",
+  "Wakefield Metropolitan District Council",
+  "Walsall Metropolitan Borough Council",
+  "Waltham Forest Council",
+  "Wandsworth Council",
+  "Warrington Borough Council",
+  "Warwickshire County Council",
+  "West Berkshire Council",
+  "West Northamptonshire Council",
+  "West Sussex County Council",
+  "Wigan Metropolitan Borough Council",
+  "Wiltshire Council",
+  "Windsor and Maidenhead Borough Council",
+  "Wirral Metropolitan Borough Council",
+  "Wolverhampton City Council",
+  "Worcestershire County Council",
+  "York City Council",
+  "Cardiff Council",
+  "Swansea Council",
+  "Newport City Council",
+  "Vale of Glamorgan Council",
+  "Rhondda Cynon Taf County Borough Council",
+  "Caerphilly County Borough Council",
+  "Bridgend County Borough Council",
+  "Neath Port Talbot Council",
+  "Carmarthenshire County Council",
+  "Pembrokeshire County Council",
+  "Ceredigion County Council",
+  "Powys County Council",
+  "Monmouthshire County Council",
+  "Blaenau Gwent County Borough Council",
+  "Torfaen County Borough Council",
+  "Merthyr Tydfil County Borough Council",
+  "Flintshire County Council",
+  "Wrexham County Borough Council",
+  "Denbighshire County Council",
+  "Conwy County Borough Council",
+  "Gwynedd Council",
+  "Isle of Anglesey County Council",
+  "Aberdeen City Council",
+  "Aberdeenshire Council",
+  "Angus Council",
+  "Argyll and Bute Council",
+  "City of Edinburgh Council",
+  "Clackmannanshire Council",
+  "Dumfries and Galloway Council",
+  "Dundee City Council",
+  "East Ayrshire Council",
+  "East Dunbartonshire Council",
+  "East Lothian Council",
+  "East Renfrewshire Council",
+  "Falkirk Council",
+  "Fife Council",
+  "Glasgow City Council",
+  "Highland Council",
+  "Inverclyde Council",
+  "Midlothian Council",
+  "Moray Council",
+  "North Ayrshire Council",
+  "North Lanarkshire Council",
+  "Orkney Islands Council",
+  "Perth and Kinross Council",
+  "Renfrewshire Council",
+  "Scottish Borders Council",
+  "Shetland Islands Council",
+  "South Ayrshire Council",
+  "South Lanarkshire Council",
+  "Stirling Council",
+  "West Dunbartonshire Council",
+  "West Lothian Council",
+  "Western Isles Council",
+] as const;
+
+function CouncilAutocomplete({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [highlight, setHighlight] = useState(-1);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const q = value.trim().toLowerCase();
+  const matches = useMemo(() => {
+    if (!q) return [];
+    return UK_COUNCILS.filter((name) =>
+      name.toLowerCase().includes(q),
+    ).slice(0, 8);
+  }, [q]);
+
+  const showDropdown =
+    open && (matches.length > 0 || (q.length > 0 && matches.length === 0));
+
+  useEffect(() => {
+    function handleMouseDown(e: MouseEvent) {
+      if (!wrapRef.current?.contains(e.target as Node)) {
+        setOpen(false);
+        setHighlight(-1);
+      }
+    }
+    document.addEventListener("mousedown", handleMouseDown);
+    return () => document.removeEventListener("mousedown", handleMouseDown);
+  }, []);
+
+  useEffect(() => {
+    if (highlight >= matches.length) setHighlight(matches.length - 1);
+    if (highlight < -1) setHighlight(-1);
+  }, [matches.length, highlight]);
+
+  const selectCouncil = (name: string) => {
+    onChange(name);
+    setOpen(false);
+    setHighlight(-1);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showDropdown && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+      setOpen(true);
+      if (matches.length > 0) setHighlight(0);
+      e.preventDefault();
+      return;
+    }
+    if (!showDropdown) return;
+
+    if (e.key === "Escape") {
+      setOpen(false);
+      setHighlight(-1);
+      e.preventDefault();
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (matches.length === 0) return;
+      setHighlight((h) => (h + 1) % matches.length);
+      return;
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (matches.length === 0) return;
+      setHighlight((h) => (h <= 0 ? matches.length - 1 : h - 1));
+      return;
+    }
+    if (e.key === "Enter") {
+      if (highlight >= 0 && highlight < matches.length) {
+        e.preventDefault();
+        selectCouncil(matches[highlight]);
+      }
+    }
+  };
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <label className="block text-sm font-medium text-foreground">
+        Issuing council <span className="text-red-600">*</span>
+      </label>
+      <input
+        type="text"
+        autoComplete="off"
+        role="combobox"
+        aria-expanded={showDropdown}
+        aria-controls="council-listbox"
+        aria-activedescendant={
+          highlight >= 0 && matches[highlight]
+            ? `council-opt-${highlight}`
+            : undefined
+        }
+        value={value}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setOpen(true);
+          setHighlight(-1);
+        }}
+        onFocus={() => setOpen(true)}
+        onKeyDown={onKeyDown}
+        placeholder="Start typing council name…"
+        className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-accent/40"
+      />
+      {showDropdown ? (
+        <ul
+          ref={listRef}
+          id="council-listbox"
+          role="listbox"
+          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-border bg-background py-1 shadow-lg"
+        >
+          {matches.length > 0 ? (
+            matches.map((name, i) => (
+              <li
+                key={name}
+                id={`council-opt-${i}`}
+                role="option"
+                aria-selected={highlight === i}
+                className={`cursor-pointer px-3 py-2 text-sm ${
+                  highlight === i
+                    ? "bg-emerald-50 text-primary"
+                    : "text-foreground hover:bg-emerald-50/80 hover:text-primary"
+                }`}
+                onMouseEnter={() => setHighlight(i)}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  selectCouncil(name);
+                }}
+              >
+                {name}
+              </li>
+            ))
+          ) : (
+            <li className="px-3 py-2 text-sm text-muted">
+              Council not found — type the full name
+            </li>
+          )}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
 
 type GroundId = (typeof GROUND_OPTIONS)[number]["id"];
 type EvidenceId = (typeof EVIDENCE_OPTIONS)[number]["id"];
@@ -412,12 +756,9 @@ export default function AppealPage() {
                   onChange={(v) => setVehicleReg(v.toUpperCase())}
                   placeholder="AB12 CDE"
                 />
-                <Field
-                  label="Issuing council"
-                  required
+                <CouncilAutocomplete
                   value={issuingCouncil}
                   onChange={setIssuingCouncil}
-                  placeholder="e.g. Manchester City Council"
                 />
                 <Field
                   label="Location of contravention"
