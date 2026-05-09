@@ -661,6 +661,29 @@ export default function AppealPage() {
   return (
     <div className="min-h-[70vh] min-w-0 bg-background px-3 py-8 sm:px-6 sm:py-12 md:py-14">
       <div className="mx-auto w-full max-w-[640px] min-w-0">
+        <div
+          role="status"
+          className="mb-6 w-full rounded-lg border border-[#F59E0B] bg-[#FEF3C7] px-4 py-3 text-sm leading-relaxed text-[#92400E] sm:px-5 sm:py-4"
+        >
+          <p className="m-0">
+            🚧 Appeal letters are coming soon — we&apos;re finishing the final
+            setup. Check back shortly. In the meantime, use our free tools to{" "}
+            <Link
+              href="/check"
+              className="font-semibold text-[#92400E] underline decoration-[#92400E]/50 underline-offset-2 hover:text-[#78350f]"
+            >
+              check your grounds
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/codes"
+              className="font-semibold text-[#92400E] underline decoration-[#92400E]/50 underline-offset-2 hover:text-[#78350f]"
+            >
+              look up your contravention code
+            </Link>
+            .
+          </p>
+        </div>
         <h1 className="text-center font-heading text-xl font-semibold text-foreground md:text-2xl lg:text-3xl">
           Appeal letter generator
         </h1>
