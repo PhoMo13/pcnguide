@@ -8,7 +8,6 @@ const navLinks = [
   { href: "/codes", label: "Code Lookup" },
   { href: "/check", label: "Check Your PCN" },
   { href: "/blue-badge", label: "Blue Badge" },
-  { href: "/appeal", label: "Appeal Letter" },
   { href: "/evidence-tips", label: "Evidence Tips" },
   { href: "/business", label: "Business" },
 ] as const;
