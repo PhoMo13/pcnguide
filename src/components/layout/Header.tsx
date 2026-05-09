@@ -7,7 +7,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/codes", label: "Code Lookup" },
   { href: "/check", label: "Check Your PCN" },
-  { href: "/appeal-letter", label: "Appeal Letter" },
+  { href: "/appeal", label: "Appeal Letter" },
   { href: "/business", label: "Business" },
 ] as const;
 
@@ -50,7 +50,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/appeal-letter"
+            href="/appeal"
             className="hidden rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:inline-flex"
           >
             Start Appeal
@@ -111,7 +111,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/appeal-letter"
+              href="/appeal"
               className="mt-2 rounded-lg bg-primary px-4 py-3 text-center text-base font-semibold text-white no-underline hover:bg-primary-hover"
               onClick={() => setMenuOpen(false)}
             >

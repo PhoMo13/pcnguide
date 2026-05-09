@@ -196,7 +196,7 @@ export default function HomePage() {
               From £6.99 — Generate your appeal letter in minutes
             </p>
             <Link
-              href="/appeal-letter"
+              href="/appeal"
               className="mt-6 inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-primary no-underline shadow-sm hover:bg-surface"
             >
               Generate appeal letter

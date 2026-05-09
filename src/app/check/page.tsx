@@ -696,7 +696,7 @@ export default function CheckPcnPage() {
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
-                  href="/appeal-letter"
+                  href="/appeal"
                   className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-white no-underline shadow-sm hover:bg-primary-hover sm:flex-none sm:min-w-[200px]"
                 >
                   Generate your appeal letter — from £6.99

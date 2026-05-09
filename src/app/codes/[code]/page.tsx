@@ -314,7 +314,7 @@ export default function ContraventionCodePage({ params }: Props) {
             Generate your appeal letter — from £6.99
           </p>
           <Link
-            href="/appeal-letter"
+            href="/appeal"
             className="mt-5 inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-semibold text-primary no-underline shadow-sm hover:bg-surface"
           >
             Generate appeal letter
