@@ -9,11 +9,70 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.pcnguide.co.uk/blue-badge" },
 };
 
+const SECTION_HEADING =
+  "mb-6 font-heading text-2xl font-semibold text-foreground";
+const CARD = "rounded-lg p-6 shadow-sm";
+const ENGLAND_WALES_CARD = `${CARD} border border-primary bg-white`;
+const SCOTLAND_CARD = `${CARD} border border-violet-200 bg-[#F5F3FF]`;
+const LIST_ITEM = "flex gap-3 py-3 pl-4";
+
 function WardenStrip({ children }: { children: ReactNode }) {
   return (
-    <p className="border-l-4 border-amber-400 bg-amber-50/80 px-4 py-3 text-sm leading-relaxed text-foreground">
+    <p className="border-l-4 border-[#D97706] bg-[#FFFBEB] px-4 py-3 text-sm leading-relaxed text-foreground">
       {children}
     </p>
+  );
+}
+
+function CanParkIcon() {
+  return (
+    <span
+      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-green-600 text-white"
+      aria-hidden
+    >
+      <svg
+        className="h-3 w-3"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={3}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+    </span>
+  );
+}
+
+function CannotParkIcon() {
+  return (
+    <span
+      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-base font-bold text-red-600"
+      aria-hidden
+    >
+      ✕
+    </span>
+  );
+}
+
+function CanParkItem({ children }: { children: ReactNode }) {
+  return (
+    <li className={LIST_ITEM}>
+      <CanParkIcon />
+      <span>{children}</span>
+    </li>
+  );
+}
+
+function CannotParkItem({ children }: { children: ReactNode }) {
+  return (
+    <li className={LIST_ITEM}>
+      <CannotParkIcon />
+      <span>{children}</span>
+    </li>
   );
 }
 
@@ -25,7 +84,7 @@ function GoldenRuleCard({
   body: string;
 }) {
   return (
-    <div className="flex gap-3 rounded-lg border border-primary/20 bg-white p-4 shadow-sm md:gap-4 md:p-5">
+    <div className={`flex gap-3 md:gap-4 ${ENGLAND_WALES_CARD}`}>
       <span
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white"
         aria-hidden
@@ -89,11 +148,11 @@ export default function BlueBadgePage() {
 
         {/* Section 1 */}
         <section className="min-w-0">
-          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
+          <h2 className={SECTION_HEADING}>
             The Golden Rules{" "}
             <span className="font-normal text-muted">(apply everywhere)</span>
           </h2>
-          <div className="mt-6 grid grid-cols-1 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 gap-4 md:gap-5">
             <GoldenRuleCard
               title="Display your badge correctly"
               body="Face up on the dashboard, hologram visible, photograph side down. CEOs can and will issue PCNs if the badge is not clearly visible through the windscreen — even if it is valid."
@@ -115,121 +174,69 @@ export default function BlueBadgePage() {
 
         {/* Section 2 */}
         <section className="min-w-0">
-          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
-            Where You CAN Park
-          </h2>
-          <div className="mt-6 space-y-6">
-            <div className="overflow-hidden rounded-lg border border-border shadow-sm">
-              <div className="bg-primary px-4 py-3 text-sm font-semibold text-white">
+          <h2 className={SECTION_HEADING}>Where You CAN Park</h2>
+          <div className="space-y-6">
+            <div className={`overflow-hidden ${ENGLAND_WALES_CARD} p-0`}>
+              <div className="bg-primary px-6 py-3 text-sm font-semibold text-white">
                 On-street — England and Wales
               </div>
-              <ul className="divide-y divide-border bg-background text-sm leading-relaxed text-foreground md:text-base">
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Disabled parking bays — free, for as long as you need
-                    (unless a sign states a time limit)
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Single and double yellow lines — up to 3 hours, must display
-                    badge and clock
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Pay and display bays — free, for as long as you need
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Pay by phone bays — free, for as long as you need
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>Meters — free, for as long as you need</span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Residents&apos; permit bays — free for up to 3 hours (display
-                    badge and clock)
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Limited waiting bays — free, for as long as you need
-                    (unless signed otherwise)
-                  </span>
-                </li>
+              <ul className="divide-y divide-border bg-white text-sm leading-relaxed text-foreground md:text-base">
+                <CanParkItem>
+                  Disabled parking bays — free, for as long as you need
+                  (unless a sign states a time limit)
+                </CanParkItem>
+                <CanParkItem>
+                  Single and double yellow lines — up to 3 hours, must display
+                  badge and clock
+                </CanParkItem>
+                <CanParkItem>
+                  Pay and display bays — free, for as long as you need
+                </CanParkItem>
+                <CanParkItem>
+                  Pay by phone bays — free, for as long as you need
+                </CanParkItem>
+                <CanParkItem>Meters — free, for as long as you need</CanParkItem>
+                <CanParkItem>
+                  Residents&apos; permit bays — free for up to 3 hours (display
+                  badge and clock)
+                </CanParkItem>
+                <CanParkItem>
+                  Limited waiting bays — free, for as long as you need
+                  (unless signed otherwise)
+                </CanParkItem>
               </ul>
             </div>
 
-            <div className="overflow-hidden rounded-lg border border-border shadow-sm">
-              <div className="bg-primary px-4 py-3 text-sm font-semibold text-white">
+            <div className={`overflow-hidden ${SCOTLAND_CARD} p-0`}>
+              <div className="bg-primary px-6 py-3 text-sm font-semibold text-white">
                 On-street — Scotland
               </div>
-              <ul className="divide-y divide-border bg-background text-sm leading-relaxed text-foreground md:text-base">
-                <li className="px-4 py-3 font-medium text-foreground">
+              <ul className="divide-y divide-violet-200 bg-[#F5F3FF] text-sm leading-relaxed text-foreground md:text-base">
+                <li className={`${LIST_ITEM} font-medium text-foreground`}>
                   All of the England and Wales items above, plus:
                 </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Yellow lines — no time limit (unlike England and Wales
-                    where 3 hours applies)
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    No need to display a parking clock on yellow lines in
-                    Scotland
-                  </span>
-                </li>
+                <CanParkItem>
+                  Yellow lines — no time limit (unlike England and Wales
+                  where 3 hours applies)
+                </CanParkItem>
+                <CanParkItem>
+                  No need to display a parking clock on yellow lines in
+                  Scotland
+                </CanParkItem>
               </ul>
             </div>
 
-            <div className="overflow-hidden rounded-lg border border-border shadow-sm">
-              <div className="bg-primary px-4 py-3 text-sm font-semibold text-white">
+            <div className={`overflow-hidden ${CARD} border border-border p-0`}>
+              <div className="bg-primary px-6 py-3 text-sm font-semibold text-white">
                 Off-street (car parks)
               </div>
               <ul className="divide-y divide-border bg-background text-sm leading-relaxed text-foreground md:text-base">
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
-                    ✅
-                  </span>
-                  <span>
-                    Council car parks — usually free or reduced charge in
-                    designated disabled bays
-                  </span>
-                </li>
-                <li className="flex gap-2 px-4 py-3">
-                  <span className="shrink-0" aria-hidden>
+                <CanParkItem>
+                  Council car parks — usually free or reduced charge in
+                  designated disabled bays
+                </CanParkItem>
+                <li className={LIST_ITEM}>
+                  <span className="mt-0.5 shrink-0 text-base" aria-hidden>
                     ⚠️
                   </span>
                   <span>
@@ -245,10 +252,8 @@ export default function BlueBadgePage() {
 
         {/* Section 3 */}
         <section className="min-w-0">
-          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
-            Where You CANNOT Park
-          </h2>
-          <ul className="mt-6 space-y-4 text-sm leading-relaxed text-foreground md:text-base">
+          <h2 className={SECTION_HEADING}>Where You CANNOT Park</h2>
+          <ul className="space-y-1 text-sm leading-relaxed text-foreground md:text-base">
             {[
               "Loading bays — Blue Badges do not exempt you from loading bay restrictions. Kerb marks (yellow spikes) indicate loading restrictions. This is one of the most common mistakes.",
               "Red routes — No exemption during operating hours. Double red lines mean no stopping at any time for anyone.",
@@ -262,12 +267,7 @@ export default function BlueBadgePage() {
               "Private land without permission — The Blue Badge scheme only applies on public highways.",
               "Anywhere that causes an obstruction or danger — Even with a valid badge, you can be fined for dangerous or obstructive parking.",
             ].map((text) => (
-              <li key={text} className="flex gap-3">
-                <span className="shrink-0 text-red-600" aria-hidden>
-                  ❌
-                </span>
-                <span>{text}</span>
-              </li>
+              <CannotParkItem key={text}>{text}</CannotParkItem>
             ))}
           </ul>
         </section>
@@ -275,10 +275,10 @@ export default function BlueBadgePage() {
         {/* Section 4 — London */}
         <section className="-mx-4 rounded-none border-y border-blue-200 bg-[#EFF6FF] px-4 py-8 sm:-mx-6 sm:rounded-lg sm:border sm:px-6 md:py-10 lg:-mx-8 lg:px-8">
           <div className="mx-auto max-w-3xl min-w-0">
-            <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
+            <h2 className={SECTION_HEADING}>
               London — Different Rules Apply
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted md:text-base">
+            <p className="text-sm leading-relaxed text-muted md:text-base">
               London has stricter Blue Badge rules than the rest of England.
               There are also 4 central London boroughs where the national Blue
               Badge scheme does not apply at all.
@@ -287,39 +287,19 @@ export default function BlueBadgePage() {
             <h3 className="mt-8 font-heading text-lg font-semibold text-foreground">
               All of London
             </h3>
-            <ul className="mt-4 space-y-3 text-sm leading-relaxed md:text-base">
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ❌
-                </span>
-                <span>
-                  Cannot park on double yellow lines anywhere in London (unlike
-                  rest of England where 3 hours is permitted)
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ❌
-                </span>
-                <span>No exemption on red routes</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ✅
-                </span>
-                <span>Can park in designated Blue Badge bays</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ✅
-                </span>
-                <span>
-                  Can register for Congestion Charge exemption (100% discount —
-                  requires £10 registration with TfL)
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
+            <ul className="mt-4 space-y-1 text-sm leading-relaxed md:text-base">
+              <CannotParkItem>
+                Cannot park on double yellow lines anywhere in London (unlike
+                rest of England where 3 hours is permitted)
+              </CannotParkItem>
+              <CannotParkItem>No exemption on red routes</CannotParkItem>
+              <CanParkItem>Can park in designated Blue Badge bays</CanParkItem>
+              <CanParkItem>
+                Can register for Congestion Charge exemption (100% discount —
+                requires £10 registration with TfL)
+              </CanParkItem>
+              <li className={LIST_ITEM}>
+                <span className="mt-0.5 shrink-0 text-base" aria-hidden>
                   ⚠️
                 </span>
                 <span>
@@ -332,7 +312,7 @@ export default function BlueBadgePage() {
               The 4 central London boroughs
             </h3>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="min-w-0 rounded-lg border border-blue-200 bg-white p-4 shadow-sm md:p-5">
+              <div className={`min-w-0 ${CARD} border border-blue-200 bg-white`}>
                 <h4 className="font-heading text-base font-semibold text-foreground">
                   City of Westminster
                 </h4>
@@ -343,7 +323,7 @@ export default function BlueBadgePage() {
                   Use designated Blue Badge bays only.
                 </p>
               </div>
-              <div className="min-w-0 rounded-lg border border-blue-200 bg-white p-4 shadow-sm md:p-5">
+              <div className={`min-w-0 ${CARD} border border-blue-200 bg-white`}>
                 <h4 className="font-heading text-base font-semibold text-foreground">
                   City of London
                 </h4>
@@ -354,7 +334,7 @@ export default function BlueBadgePage() {
                   Badge bays. Cannot park on yellow lines.
                 </p>
               </div>
-              <div className="min-w-0 rounded-lg border border-blue-200 bg-white p-4 shadow-sm md:p-5">
+              <div className={`min-w-0 ${CARD} border border-blue-200 bg-white`}>
                 <h4 className="font-heading text-base font-semibold text-foreground">
                   Royal Borough of Kensington and Chelsea
                 </h4>
@@ -368,7 +348,7 @@ export default function BlueBadgePage() {
                   Cannot park on double yellow lines.
                 </p>
               </div>
-              <div className="min-w-0 rounded-lg border border-blue-200 bg-white p-4 shadow-sm md:p-5">
+              <div className={`min-w-0 ${CARD} border border-blue-200 bg-white`}>
                 <h4 className="font-heading text-base font-semibold text-foreground">
                   London Borough of Camden (part)
                 </h4>
@@ -394,39 +374,22 @@ export default function BlueBadgePage() {
         {/* Section 5 — Scotland */}
         <section className="-mx-4 rounded-none border-y border-violet-200 bg-[#F5F3FF] px-4 py-8 sm:-mx-6 sm:rounded-lg sm:border sm:px-6 md:py-10 lg:-mx-8 lg:px-8">
           <div className="mx-auto max-w-3xl min-w-0">
-            <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
-              Scotland — Key Differences
-            </h2>
-            <ul className="mt-6 space-y-3 text-sm leading-relaxed md:text-base">
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ✅
-                </span>
-                <span>
-                  No time limit on yellow lines — unlike England and Wales (3
-                  hours), Scotland has no time limit for Blue Badge holders on
-                  yellow lines
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ✅
-                </span>
-                <span>
-                  No parking clock required on yellow lines in Scotland
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
-                  ✅
-                </span>
-                <span>
-                  Otherwise similar rights to England — disabled bays, pay and
-                  display, meters
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0" aria-hidden>
+            <h2 className={SECTION_HEADING}>Scotland — Key Differences</h2>
+            <ul className="space-y-1 text-sm leading-relaxed md:text-base">
+              <CanParkItem>
+                No time limit on yellow lines — unlike England and Wales (3
+                hours), Scotland has no time limit for Blue Badge holders on
+                yellow lines
+              </CanParkItem>
+              <CanParkItem>
+                No parking clock required on yellow lines in Scotland
+              </CanParkItem>
+              <CanParkItem>
+                Otherwise similar rights to England — disabled bays, pay and
+                display, meters
+              </CanParkItem>
+              <li className={LIST_ITEM}>
+                <span className="mt-0.5 shrink-0 text-base" aria-hidden>
                   ⚠️
                 </span>
                 <span>
@@ -435,7 +398,7 @@ export default function BlueBadgePage() {
                 </span>
               </li>
             </ul>
-            <div className="mt-6 rounded-lg border border-violet-200 bg-white/80 px-4 py-3 text-sm leading-relaxed text-muted">
+            <div className={`mt-6 ${SCOTLAND_CARD} text-sm leading-relaxed text-muted`}>
               <strong className="text-foreground">Note:</strong> Scotland has
               its own Blue Badge scheme administered by Scottish councils. The
               badge is valid across the UK.
@@ -445,10 +408,10 @@ export default function BlueBadgePage() {
 
         {/* Section 6 — Wales */}
         <section className="min-w-0">
-          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
-            Wales
-          </h2>
-          <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted md:text-base">
+          <h2 className={SECTION_HEADING}>Wales</h2>
+          <div
+            className={`space-y-4 text-sm leading-relaxed text-muted md:text-base ${ENGLAND_WALES_CARD}`}
+          >
             <p>
               Wales follows the same national Blue Badge rules as England — 3
               hours on yellow lines, parking clock required, same exemptions and
@@ -456,18 +419,19 @@ export default function BlueBadgePage() {
               schemes but the parking rights are the same.
             </p>
             <p>
-              Blue Badges are free in Wales (cost up to £10 in England and
-              Scotland).
+              Blue Badges are free in Wales. They cost up to £10 in England and
+              up to £20 in Scotland. Badges are valid for up to 3 years.{" "}
+              Source: GOV.UK
             </p>
           </div>
         </section>
 
         {/* Section 7 */}
         <section className="min-w-0">
-          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
+          <h2 className={SECTION_HEADING}>
             Common Mistakes That Lead to PCNs
           </h2>
-          <div className="mt-6 space-y-6">
+          <div className="space-y-6">
             {[
               {
                 title: "Parking in a loading bay",
@@ -500,14 +464,16 @@ export default function BlueBadgePage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-lg border border-border bg-background p-4 shadow-sm md:p-5"
+                className={`${CARD} border border-border bg-background`}
               >
                 <h3 className="font-heading text-base font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <div className="mt-3 border-l-4 border-amber-400 bg-amber-50/80 px-3 py-2 text-sm leading-relaxed text-foreground">
-                  <span className="font-semibold">Warden note: </span>
-                  {item.note}
+                <div className="mt-3">
+                  <WardenStrip>
+                    <span className="font-semibold">Warden note: </span>
+                    {item.note}
+                  </WardenStrip>
                 </div>
               </div>
             ))}
@@ -515,11 +481,11 @@ export default function BlueBadgePage() {
         </section>
 
         {/* Section 8 */}
-        <section className="min-w-0 rounded-lg border border-border bg-surface p-5 md:p-8">
-          <h2 className="font-heading text-xl font-semibold text-foreground md:text-2xl">
+        <section className={`min-w-0 ${CARD} border border-border bg-surface`}>
+          <h2 className={SECTION_HEADING}>
             Got a PCN Despite Having a Blue Badge?
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted md:text-base">
+          <p className="text-sm leading-relaxed text-muted md:text-base">
             If you received a PCN while correctly displaying a valid Blue Badge,
             you may have grounds to challenge. Common successful challenges
             include:
