@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 export const COOKIE_CONSENT_KEY = "pcnguide_cookie_consent";
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const GA_MEASUREMENT_ID = "G-99VNQ4GFXQ";
 
 export type CookieConsent = "accepted" | "rejected";
 
