@@ -6,6 +6,7 @@ const footerLinks = [
   { href: "/appeal-stages", label: "How Appeals Work" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },
+  { href: "/cookies", label: "Cookie Policy" },
   { href: "/terms", label: "Terms" },
 ] as const;
 

@@ -3,6 +3,7 @@ import { DM_Sans, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -87,6 +88,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
